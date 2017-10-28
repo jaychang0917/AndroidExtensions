@@ -1,6 +1,7 @@
 package com.jaychang.android.extensions.core
 
 import android.app.Activity
+import android.app.ActivityManager
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -18,6 +19,7 @@ import com.jaychang.android.extensions.util.FileUtils
 import java.io.File
 import java.io.IOException
 import java.util.*
+import kotlin.reflect.KClass
 
 /**
  * system
@@ -152,6 +154,11 @@ fun Context.openAppInGooglePlay(packageName: String) {
   } catch (e: ActivityNotFoundException) {
     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + packageName)))
   }
+}
+
+fun Context.isServiceRunning(clazz: KClass<*>): Boolean {
+  val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+  return manager.getRunningServices(Integer.MAX_VALUE).any { clazz.java.name == it.service.className }
 }
 
 
