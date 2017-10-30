@@ -200,5 +200,5 @@ fun Context.getMetaDataValue(name: String): String? {
     return null
   }
 
-  return appInfo.metaData.get(name) as String
+  return (appInfo.metaData.get(name) as String).trim()
 }
