@@ -1,4 +1,4 @@
-package com.jaychang.android.extensions.util
+package com.jaychang.extensions.util
 
 import org.threeten.bp.*
 import org.threeten.bp.format.DateTimeFormatter

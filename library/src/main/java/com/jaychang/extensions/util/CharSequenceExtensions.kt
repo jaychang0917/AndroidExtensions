@@ -1,4 +1,4 @@
-package com.jaychang.android.extensions.util
+package com.jaychang.extensions.util
 
 import android.graphics.Color
 import android.graphics.Typeface

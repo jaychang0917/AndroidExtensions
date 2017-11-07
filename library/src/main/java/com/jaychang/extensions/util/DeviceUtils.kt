@@ -1,4 +1,4 @@
-package com.jaychang.android.extensions.util
+package com.jaychang.extensions.util
 
 import android.Manifest
 import android.annotation.SuppressLint

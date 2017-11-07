@@ -1,4 +1,4 @@
-package com.jaychang.android.extensions.util
+package com.jaychang.extensions.util
 
 
 fun <K,V> HashMap<K, V>.removeAll(vararg keys: K): HashMap<K, V> {

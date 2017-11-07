@@ -1,4 +1,4 @@
-package com.jaychang.android.extensions.util
+package com.jaychang.extensions.util
 
 fun Int.digits(): List<Int> {
   val result = mutableListOf<Int>()

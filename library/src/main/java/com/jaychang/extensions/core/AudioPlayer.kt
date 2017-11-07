@@ -1,4 +1,4 @@
-package com.jaychang.android.extensions.core
+package com.jaychang.extensions.core
 
 import android.content.Context
 import android.media.AudioManager
