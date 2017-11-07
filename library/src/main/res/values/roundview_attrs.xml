@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="round_radius" format="dimension|reference" />
+    <attr name="round_topLeftRadius" format="dimension|reference" />
+    <attr name="round_topRightRadius" format="dimension|reference" />
+    <attr name="round_bottomLeftRadius" format="dimension|reference" />
+    <attr name="round_bottomRightRadius" format="dimension|reference" />
+
+    <declare-styleable name="RoundFrameLayout">
+        <attr name="round_radius" />
+        <attr name="round_topLeftRadius" />
+        <attr name="round_topRightRadius" />
+        <attr name="round_bottomLeftRadius" />
+        <attr name="round_bottomRightRadius" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundLinearLayout">
+        <attr name="round_radius" />
+        <attr name="round_topLeftRadius" />
+        <attr name="round_topRightRadius" />
+        <attr name="round_bottomLeftRadius" />
+        <attr name="round_bottomRightRadius" />
+    </declare-styleable>
+</resources>
