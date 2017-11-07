@@ -1,4 +1,4 @@
-package com.jaychang.android.extensions.ui
+package com.jaychang.android.extensions.util
 
 import android.net.Uri
 import android.widget.ImageView

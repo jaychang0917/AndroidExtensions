@@ -1,4 +1,4 @@
-package com.jaychang.android.extensions.ui
+package com.jaychang.android.extensions.util
 
 import android.animation.ValueAnimator
 import android.view.MotionEvent

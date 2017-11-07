@@ -1,4 +1,4 @@
-package com.jaychang.android.extensions.common
+package com.jaychang.android.extensions.core
 
 import android.app.Activity
 import android.app.Application

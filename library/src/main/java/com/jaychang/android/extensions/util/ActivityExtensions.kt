@@ -1,4 +1,4 @@
-package com.jaychang.android.extensions.core
+package com.jaychang.android.extensions.util
 
 import android.Manifest
 import android.annotation.TargetApi

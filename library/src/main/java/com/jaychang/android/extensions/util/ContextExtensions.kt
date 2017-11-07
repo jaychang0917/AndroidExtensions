@@ -1,4 +1,4 @@
-package com.jaychang.android.extensions.core
+package com.jaychang.android.extensions.util
 
 import android.app.Activity
 import android.app.ActivityManager
@@ -15,7 +15,6 @@ import android.provider.MediaStore
 import android.support.v4.app.Fragment
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.jaychang.android.extensions.util.FileUtils
 import java.io.File
 import java.io.IOException
 import java.util.*

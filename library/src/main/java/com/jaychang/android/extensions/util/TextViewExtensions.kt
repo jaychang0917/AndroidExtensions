@@ -1,4 +1,4 @@
-package com.jaychang.android.extensions.ui
+package com.jaychang.android.extensions.util
 
 import android.graphics.Rect
 import android.widget.TextView

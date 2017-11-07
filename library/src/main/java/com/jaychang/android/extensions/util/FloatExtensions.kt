@@ -1,4 +1,4 @@
-package com.jaychang.android.extensions.core
+package com.jaychang.android.extensions.util
 
 fun Float.round(numberOfDecimal: Int): Float {
   var pow = 10
