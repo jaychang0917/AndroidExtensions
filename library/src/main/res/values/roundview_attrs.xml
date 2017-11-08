@@ -21,4 +21,52 @@
         <attr name="round_bottomLeftRadius" />
         <attr name="round_bottomRightRadius" />
     </declare-styleable>
+
+    <declare-styleable name="RoundRelativeLayout">
+        <attr name="round_radius" />
+        <attr name="round_topLeftRadius" />
+        <attr name="round_topRightRadius" />
+        <attr name="round_bottomLeftRadius" />
+        <attr name="round_bottomRightRadius" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundGridLayout">
+        <attr name="round_radius" />
+        <attr name="round_topLeftRadius" />
+        <attr name="round_topRightRadius" />
+        <attr name="round_bottomLeftRadius" />
+        <attr name="round_bottomRightRadius" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundImageView">
+        <attr name="round_radius" />
+        <attr name="round_topLeftRadius" />
+        <attr name="round_topRightRadius" />
+        <attr name="round_bottomLeftRadius" />
+        <attr name="round_bottomRightRadius" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundTextView">
+        <attr name="round_radius" />
+        <attr name="round_topLeftRadius" />
+        <attr name="round_topRightRadius" />
+        <attr name="round_bottomLeftRadius" />
+        <attr name="round_bottomRightRadius" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundEditText">
+        <attr name="round_radius" />
+        <attr name="round_topLeftRadius" />
+        <attr name="round_topRightRadius" />
+        <attr name="round_bottomLeftRadius" />
+        <attr name="round_bottomRightRadius" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundButton">
+        <attr name="round_radius" />
+        <attr name="round_topLeftRadius" />
+        <attr name="round_topRightRadius" />
+        <attr name="round_bottomLeftRadius" />
+        <attr name="round_bottomRightRadius" />
+    </declare-styleable>
 </resources>
