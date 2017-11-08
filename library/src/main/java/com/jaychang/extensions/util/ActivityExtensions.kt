@@ -11,7 +11,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
-import android.support.annotation.ColorRes
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -19,7 +18,6 @@ import android.support.v4.content.FileProvider
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import java.io.File
@@ -164,82 +162,129 @@ fun Activity.setAutoHideKeyboardWhenTouchOutside() {
   }
 }
 
-@TargetApi(19)
-fun Activity.setStatusBarTranslucent() {
-  if (Build.VERSION.SDK_INT < 19 || window == null) {
-    return
-  }
-
-  window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-}
-
-@TargetApi(19)
-fun Activity.clearStatusBarTranslucent() {
-  if (Build.VERSION.SDK_INT < 19 || window == null) {
-    return
-  }
-
-  window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-}
-
-@TargetApi(21)
-fun Activity.setStatusBarColor(@ColorRes color: Int) {
-  if (Build.VERSION.SDK_INT < 21 || window == null) {
-    return
-  }
-
-  window.statusBarColor = ContextCompat.getColor(this, color)
-}
-
-@TargetApi(21)
-fun Activity.setContentBehindStatusBar() {
-  if (Build.VERSION.SDK_INT < 21 || window == null) {
-    return
-  }
-
+fun Activity.toggleFullScreen() {
   val decorView = window.decorView
-  val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-  decorView.systemUiVisibility = option
+  decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION + View.SYSTEM_UI_FLAG_FULLSCREEN
 }
 
-@TargetApi(19)
-fun Activity.setNavigationBarTranslucent() {
-  if (Build.VERSION.SDK_INT < 19 || window == null) {
-    return
+var Activity.isStatusBarTranslucent: Boolean
+  get() {
+    if (Build.VERSION.SDK_INT < 19) {
+      throw RuntimeException("API level must >= 19")
+    } else {
+      val option = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+      return window.attributes.flags and option != 0
+    }
+  }
+  set(isTranslucent) {
+    if (Build.VERSION.SDK_INT < 19) return
+
+    val option = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+    if (isTranslucent) {
+      if (!isStatusBarTranslucent) {
+        window.addFlags(option)
+      }
+    } else {
+      if (isStatusBarTranslucent) {
+        window.clearFlags(option)
+      }
+    }
   }
 
-  window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
-}
+var Activity.isNavigationTranslucent: Boolean
+  get() {
+    if (Build.VERSION.SDK_INT < 19) {
+      throw RuntimeException("API level must >= 19")
+    } else {
+      val option = WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
+      return window.attributes.flags and option != 0
+    }
+  }
+  set(isTranslucent) {
+    if (Build.VERSION.SDK_INT < 19) return
 
-@TargetApi(19)
-fun Activity.clearNavigationBarTranslucent(activity: Activity) {
-  if (Build.VERSION.SDK_INT < 19 || activity.window == null) {
-    return
+    val option = WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
+    if (isTranslucent) {
+      if (!isNavigationTranslucent) {
+        window.addFlags(option)
+      }
+    } else {
+      if (isNavigationTranslucent) {
+        window.clearFlags(option)
+      }
+    }
   }
 
-  activity.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
-}
+var Activity.navigationBarColor: Int
+  get() {
+    if (Build.VERSION.SDK_INT < 21) {
+      throw RuntimeException("API level must >= 21")
+    } else {
+      return window.navigationBarColor
+    }
+  }
+  set(color) {
+    if (Build.VERSION.SDK_INT < 21) {
+      return
+    }
 
-@TargetApi(21)
-fun Activity.setNavigationBarColor(@ColorRes color: Int) {
-  if (Build.VERSION.SDK_INT < 21 || window == null) {
-    return
+    window.navigationBarColor = color
   }
 
-  window.navigationBarColor = ContextCompat.getColor(this, color)
-}
-
-fun Activity.setFullscreenToggleable() {
-  if (window == null) {
-    return
+var Activity.statusBarColor: Int
+  get() {
+    if (Build.VERSION.SDK_INT < 21) {
+      throw RuntimeException("API level must >= 21")
+    } else {
+      return window.statusBarColor
+    }
   }
-  val decorView = window.decorView
-  val option = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
-  decorView.systemUiVisibility = option
-}
+  set(color) {
+    if (Build.VERSION.SDK_INT < 21) {
+      return
+    }
 
-fun Activity.fullscreen() {
-  requestWindowFeature(Window.FEATURE_NO_TITLE)
-  window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-}
+    window.statusBarColor = color
+  }
+
+var Activity.isContentUnderStatusBar: Boolean
+  get() {
+    val decorView = window.decorView
+    val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN + View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+    return decorView.systemUiVisibility and option != 0
+  }
+  set(isUnder) {
+    if (Build.VERSION.SDK_INT < 21) return
+
+    val decorView = window.decorView
+    val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN + View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+    if (isUnder) {
+      if (!isContentUnderStatusBar) {
+        decorView.systemUiVisibility += option
+      }
+    } else {
+      if (isContentUnderStatusBar) {
+        decorView.systemUiVisibility -= option
+      }
+    }
+  }
+
+var Activity.isStatusBarVisible: Boolean
+  get() {
+    val decorView = window.decorView
+    return decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_FULLSCREEN != 0
+  }
+  set(visible) {
+    val decorView = window.decorView
+    val option = View.SYSTEM_UI_FLAG_FULLSCREEN
+    if (visible) {
+      if (!isStatusBarVisible) {
+        decorView.systemUiVisibility -= option
+      }
+    } else {
+      if (isStatusBarVisible) {
+        decorView.systemUiVisibility += option
+      }
+    }
+  }
 
