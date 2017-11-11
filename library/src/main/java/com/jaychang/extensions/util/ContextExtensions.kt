@@ -3,6 +3,7 @@ package com.jaychang.extensions.util
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.ActivityNotFoundException
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -156,10 +157,19 @@ fun Context.openAppInGooglePlay(packageName: String) {
 }
 
 fun Context.isServiceRunning(clazz: KClass<*>): Boolean {
-  val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+  val manager = applicationContext.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
   return manager.getRunningServices(Integer.MAX_VALUE).any { clazz.java.name == it.service.className }
 }
 
+val Context.clipboardText: CharSequence?
+  get() {
+    val clipboard = applicationContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    return if (clipboard.hasPrimaryClip()) {
+      clipboard.primaryClip.getItemAt(0).coerceToText(this)
+    } else {
+      null
+    }
+  }
 
 /**
  * meta
