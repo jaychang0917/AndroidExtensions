@@ -288,3 +288,15 @@ var Activity.isStatusBarVisible: Boolean
     }
   }
 
+var Activity.isScreenAlwaysOn: Boolean
+  get() {
+    return window.attributes.flags and WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON != 0
+  }
+  set(isOn) {
+    if (isOn) {
+      window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+    } else {
+      window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+    }
+  }
+
