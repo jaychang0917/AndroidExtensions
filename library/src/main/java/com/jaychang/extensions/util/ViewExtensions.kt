@@ -4,6 +4,7 @@ import android.animation.ValueAnimator
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 
 fun View.measure() {
   val params = layoutParams ?: ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -188,4 +189,13 @@ fun View.isTouchInside(motionEvent: MotionEvent): Boolean {
     && motionX <= viewLoc[0] + width
     && motionY >= viewLoc[1]
     && motionY <= viewLoc[1] + height
+}
+
+fun View.onLayout(f: (View) -> Unit) {
+  viewTreeObserver.addOnGlobalLayoutListener(object: ViewTreeObserver.OnGlobalLayoutListener {
+    override fun onGlobalLayout() {
+      viewTreeObserver.removeOnGlobalLayoutListener(this)
+      f(this@onLayout)
+    }
+  })
 }
