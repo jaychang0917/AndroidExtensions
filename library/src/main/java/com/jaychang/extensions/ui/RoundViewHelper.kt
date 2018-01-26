@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import android.view.View
 import com.jaychang.android.extensions.R
 
-class RoundViewHelper {
+internal class RoundViewHelper {
   var radius = 0f
   var topLeftRadius = 0f
   var topRightRadius = 0f
