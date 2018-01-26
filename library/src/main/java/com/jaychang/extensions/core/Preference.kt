@@ -6,6 +6,14 @@ import android.preference.PreferenceManager
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
+/**
+ *  Example:
+    object MySharePreference: Preference(context) {
+      var name by PreferenceDelegate<String>()
+      var userId by PreferenceDelegate<Long>()
+    }
+ * */
+
 abstract class Preference(context: Context) {
 
   private val sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
