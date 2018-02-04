@@ -3,7 +3,9 @@ package com.jaychang.extensions.util
 import android.Manifest
 import android.annotation.TargetApi
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
@@ -20,6 +22,7 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import com.jaychang.extensions.BuildConfig
 import java.io.File
 import java.io.IOException
 import java.util.*
@@ -93,7 +96,7 @@ private fun internalGetPhotoFromCamera(activity: Activity, requestCode: Int): Ur
     }
 
     if (photoFile != null) {
-      val uri = FileProvider.getUriForFile(activity, "com.jaychang.android.extensions.provider", photoFile)
+      val uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".provider", photoFile)
       intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
       intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
       activity.startActivityForResult(intent, requestCode)
@@ -300,3 +303,31 @@ var Activity.isScreenAlwaysOn: Boolean
     }
   }
 
+fun Activity.showMessageDialog(message: String, title: String? = null, okText:String, okButtonClickListener: (()->Unit)? = null) {
+  AlertDialog.Builder(this)
+    .setTitle(title)
+    .setMessage(message)
+    .setPositiveButton(okText) { _, _ -> okButtonClickListener?.invoke() }
+    .show()
+}
+
+fun Activity.showItemsDialog(title: String? = null, items: Array<String>, listener: ((DialogInterface, Int)->Unit)? = null) {
+  AlertDialog.Builder(this)
+    .setTitle(title)
+    .setItems(items, listener)
+    .show()
+}
+
+fun Activity.showMultiChoiceDialog(title: String? = null, items: Array<String>, selectedItems: BooleanArray, listener: ((DialogInterface, Int, Boolean)->Unit)? = null) {
+  AlertDialog.Builder(this)
+    .setTitle(title)
+    .setMultiChoiceItems(items, selectedItems, listener)
+    .show()
+}
+
+fun Activity.showSingleChoiceDialog(title: String? = null, items: Array<String>, checkedItem: Int, listener: ((DialogInterface, Int)->Unit)? = null) {
+  AlertDialog.Builder(this)
+    .setTitle(title)
+    .setSingleChoiceItems(items, checkedItem, listener)
+    .show()
+}

@@ -6,7 +6,7 @@ import android.graphics.Path
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
-import com.jaychang.android.extensions.R
+import com.jaychang.extensions.R
 
 internal class RoundViewHelper {
   var radius = 0f

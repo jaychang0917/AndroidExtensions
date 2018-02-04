@@ -1,18 +1,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jaychang.android.extensions">
+    package="com.jaychang.extensions">
 
     <application>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:grantUriPermissions="true"
             android:exported="false"
-            android:authorities="com.jaychang.android.extensions.provider">
+            android:authorities="com.jaychang.extensions.provider">
 
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"/>
 
         </provider>
+
+        <provider
+            android:authorities="${applicationId}.ContextProvider"
+            android:name=".internal.ContextProvider"
+            android:exported="false"
+            android:enabled="true"/>
     </application>
 
 </manifest>

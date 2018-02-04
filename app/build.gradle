@@ -5,7 +5,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId "com.jaychang.android.extensions.demo"
+        applicationId "com.jaychang.extensions.demo"
         minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
