@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import com.jaychang.extensions.internal.RoundViewHelper
 
 class RoundFrameLayout : FrameLayout {
   private val roundViewHelper = RoundViewHelper()

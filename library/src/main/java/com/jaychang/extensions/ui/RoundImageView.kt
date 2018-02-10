@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.widget.ImageView
+import com.jaychang.extensions.internal.RoundViewHelper
 
 class RoundImageView : ImageView {
   private val roundViewHelper = RoundViewHelper()

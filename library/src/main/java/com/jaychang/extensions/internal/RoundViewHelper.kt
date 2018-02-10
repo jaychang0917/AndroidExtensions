@@ -1,4 +1,4 @@
-package com.jaychang.extensions.ui
+package com.jaychang.extensions.internal
 
 import android.content.Context
 import android.graphics.Canvas

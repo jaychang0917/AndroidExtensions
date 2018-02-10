@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.widget.RelativeLayout
+import com.jaychang.extensions.internal.RoundViewHelper
 
 class RoundRelativeLayout : RelativeLayout {
   private val roundViewHelper = RoundViewHelper()

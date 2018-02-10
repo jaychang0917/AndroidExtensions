@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.widget.EditText
+import com.jaychang.extensions.internal.RoundViewHelper
 
 class RoundEditText : EditText {
   private val roundViewHelper = RoundViewHelper()
