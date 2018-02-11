@@ -29,12 +29,12 @@ fun pxToDp(px: Int): Int {
   return (px / density + 0.5f).toInt()
 }
 
-fun spToPx(sp: Float): Int {
+fun spToPx(sp: Int): Int {
   val fontScale = Resources.getSystem().displayMetrics.scaledDensity
   return (sp * fontScale + 0.5f).toInt()
 }
 
-fun pxToSp(px: Float): Int {
+fun pxToSp(px: Int): Int {
   val fontScale = Resources.getSystem().displayMetrics.scaledDensity
   return (px / fontScale + 0.5f).toInt()
 }

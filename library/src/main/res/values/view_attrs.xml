@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="view_radius" format="dimension|reference" />
+    <attr name="view_topLeftRadius" format="dimension|reference" />
+    <attr name="view_topRightRadius" format="dimension|reference" />
+    <attr name="view_bottomLeftRadius" format="dimension|reference" />
+    <attr name="view_bottomRightRadius" format="dimension|reference" />
+    <attr name="view_border_width" format="dimension|reference" />
+    <attr name="view_border_color" format="color|reference" />
+
+    <declare-styleable name="FrameLayout">
+        <attr name="view_radius" />
+        <attr name="view_topLeftRadius" />
+        <attr name="view_topRightRadius" />
+        <attr name="view_bottomLeftRadius" />
+        <attr name="view_bottomRightRadius" />
+        <attr name="view_border_width" />
+        <attr name="view_border_color" />
+    </declare-styleable>
+
+    <declare-styleable name="LinearLayout">
+        <attr name="view_radius" />
+        <attr name="view_topLeftRadius" />
+        <attr name="view_topRightRadius" />
+        <attr name="view_bottomLeftRadius" />
+        <attr name="view_bottomRightRadius" />
+        <attr name="view_border_color" />
+        <attr name="view_border_width" />
+    </declare-styleable>
+
+    <declare-styleable name="RelativeLayout">
+        <attr name="view_radius" />
+        <attr name="view_topLeftRadius" />
+        <attr name="view_topRightRadius" />
+        <attr name="view_bottomLeftRadius" />
+        <attr name="view_bottomRightRadius" />
+        <attr name="view_border_width" />
+        <attr name="view_border_color" />
+    </declare-styleable>
+
+    <declare-styleable name="GridLayout">
+        <attr name="view_radius" />
+        <attr name="view_topLeftRadius" />
+        <attr name="view_topRightRadius" />
+        <attr name="view_bottomLeftRadius" />
+        <attr name="view_bottomRightRadius" />
+        <attr name="view_border_width" />
+        <attr name="view_border_color" />
+    </declare-styleable>
+
+    <declare-styleable name="ImageView">
+        <attr name="view_radius" />
+        <attr name="view_topLeftRadius" />
+        <attr name="view_topRightRadius" />
+        <attr name="view_bottomLeftRadius" />
+        <attr name="view_bottomRightRadius" />
+        <attr name="view_border_width" />
+        <attr name="view_border_color" />
+    </declare-styleable>
+
+    <declare-styleable name="TextView">
+        <attr name="view_radius" />
+        <attr name="view_topLeftRadius" />
+        <attr name="view_topRightRadius" />
+        <attr name="view_bottomLeftRadius" />
+        <attr name="view_bottomRightRadius" />
+        <attr name="view_border_width" />
+        <attr name="view_border_color" />
+    </declare-styleable>
+
+    <declare-styleable name="EditText">
+        <attr name="view_radius" />
+        <attr name="view_topLeftRadius" />
+        <attr name="view_topRightRadius" />
+        <attr name="view_bottomLeftRadius" />
+        <attr name="view_bottomRightRadius" />
+        <attr name="view_border_width" />
+        <attr name="view_border_color" />
+    </declare-styleable>
+
+    <declare-styleable name="Button">
+        <attr name="view_radius" />
+        <attr name="view_topLeftRadius" />
+        <attr name="view_topRightRadius" />
+        <attr name="view_bottomLeftRadius" />
+        <attr name="view_bottomRightRadius" />
+        <attr name="view_border_width" />
+        <attr name="view_border_color" />
+    </declare-styleable>
+</resources>

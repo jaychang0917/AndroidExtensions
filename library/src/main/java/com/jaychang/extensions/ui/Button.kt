@@ -3,24 +3,25 @@ package com.jaychang.extensions.ui
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.widget.TextView
-import com.jaychang.extensions.internal.RoundViewHelper
+import android.widget.Button
+import com.jaychang.extensions.internal.ViewHelper
 
-class RoundTextView : TextView {
-  private val roundViewHelper = RoundViewHelper()
+class Button : Button {
+  private val viewHelper = ViewHelper()
 
   constructor(ctx: Context) : this(ctx, null, 0)
   constructor(ctx: Context, attrs: AttributeSet?) : this(ctx, attrs, 0)
   constructor(ctx: Context, attrs: AttributeSet?, defaultStyle: Int) : super(ctx, attrs, defaultStyle) {
-    roundViewHelper.init(this, ctx, attrs)
+    viewHelper.init(this, ctx, attrs)
   }
 
   override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
-    roundViewHelper.onSizeChanged(width, height)
+    viewHelper.onSizeChanged(width, height)
   }
 
   override fun draw(canvas: Canvas) {
-    roundViewHelper.draw(canvas)
+    viewHelper.clipPath(canvas)
     super.draw(canvas)
+    viewHelper.drawPath(canvas)
   }
 }
