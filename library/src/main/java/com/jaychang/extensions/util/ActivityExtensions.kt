@@ -85,7 +85,7 @@ private fun Activity.createImageFile(): File {
   return File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), imageFileName)
 }
 
-private fun internalGetPhotoFromCamera(activity: Activity, requestCode: Int): Uri? {
+private fun internalTakePhotoFromCamera(activity: Activity, requestCode: Int): File? {
   val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
   if (intent.resolveActivity(activity.packageManager) != null) {
     var photoFile: File? = null
@@ -100,7 +100,7 @@ private fun internalGetPhotoFromCamera(activity: Activity, requestCode: Int): Ur
       intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
       intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
       activity.startActivityForResult(intent, requestCode)
-      return uri
+      return photoFile
     }
   } else {
     Log.d(activity.javaClass.simpleName, "No camera app.")
@@ -109,12 +109,12 @@ private fun internalGetPhotoFromCamera(activity: Activity, requestCode: Int): Ur
   return null
 }
 
-fun Activity.getPhotoFromCamera(requestCode: Int): Uri? {
-  return internalGetPhotoFromCamera(this, requestCode)
+fun Activity.takePhotoFromCamera(requestCode: Int): File? {
+  return internalTakePhotoFromCamera(this, requestCode)
 }
 
-fun Fragment.getPhotoFromCamera(requestCode: Int): Uri? {
-  return internalGetPhotoFromCamera(activity, requestCode)
+fun Fragment.takePhotoFromCamera(requestCode: Int): File? {
+  return internalTakePhotoFromCamera(activity, requestCode)
 }
 
 @TargetApi(18)
