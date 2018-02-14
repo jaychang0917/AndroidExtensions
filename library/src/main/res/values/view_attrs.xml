@@ -87,4 +87,14 @@
         <attr name="view_border_width" />
         <attr name="view_border_color" />
     </declare-styleable>
+
+    <declare-styleable name="View">
+        <attr name="view_radius" />
+        <attr name="view_topLeftRadius" />
+        <attr name="view_topRightRadius" />
+        <attr name="view_bottomLeftRadius" />
+        <attr name="view_bottomRightRadius" />
+        <attr name="view_border_width" />
+        <attr name="view_border_color" />
+    </declare-styleable>
 </resources>
