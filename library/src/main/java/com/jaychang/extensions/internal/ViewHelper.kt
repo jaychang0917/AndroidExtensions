@@ -5,9 +5,10 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import com.jaychang.extensions.R
-import com.jaychang.extensions.util.dpToPx
 
 internal class ViewHelper {
+  private lateinit var view: View
+
   private var radius = 0f
   private var topLeftRadius = 0f
   private var topRightRadius = 0f
@@ -17,9 +18,16 @@ internal class ViewHelper {
 
   private var borderWidth = 0
   private var borderColor = 0
-  private var paint = Paint()
+  private var borderPaint = Paint()
+
+  private var badgeColor = 0
+  private var badgeRadius = 0
+  private var badgeInset = 0
+  private var badgePaint = Paint()
 
   fun init(view: View, ctx: Context, attrs: AttributeSet?) {
+    this.view = view
+
     view.setWillNotDraw(false)
 
     val viewAttrs = intArrayOf(
@@ -28,8 +36,11 @@ internal class ViewHelper {
       R.attr.view_topRightRadius, 0,
       R.attr.view_bottomLeftRadius, 0,
       R.attr.view_bottomRightRadius, 0,
-      R.attr.view_border_width, 0,
-      R.attr.view_border_color
+      R.attr.view_borderWidth, 0,
+      R.attr.view_borderColor, 0,
+      R.attr.view_badgeRadius, 0,
+      R.attr.view_badgeColor, 0,
+      R.attr.view_badgeInset
     )
     val typeArray = ctx.obtainStyledAttributes(attrs, viewAttrs)
 
@@ -42,11 +53,17 @@ internal class ViewHelper {
     borderWidth = typeArray.getDimensionPixelSize(10, 0)
     borderColor = typeArray.getColor(12, Color.TRANSPARENT)
 
+    badgeRadius = typeArray.getDimensionPixelSize(14, 0)
+    badgeColor = typeArray.getColor(16, Color.RED)
+    badgeInset = typeArray.getDimensionPixelSize(18, 0)
+
     typeArray.recycle()
 
-    paint.color = borderColor
-    paint.strokeWidth = dpToPx(borderWidth).toFloat()
-    paint.style = Paint.Style.STROKE
+    borderPaint.color = borderColor
+    borderPaint.strokeWidth = borderWidth.toFloat()
+    borderPaint.style = Paint.Style.STROKE
+
+    badgePaint.color = badgeColor
   }
 
   fun onSizeChanged(width: Int, height: Int) {
@@ -60,10 +77,19 @@ internal class ViewHelper {
   }
 
   fun clipPath(canvas: Canvas) {
+    canvas.save()
     canvas.clipPath(path)
   }
 
-  fun drawPath(canvas: Canvas) {
-    canvas.drawPath(path, paint)
+  fun drawBorder(canvas: Canvas) {
+    canvas.drawPath(path, borderPaint)
+    canvas.restore()
+  }
+
+  fun drawBadge(canvas: Canvas) {
+    val bound = canvas.clipBounds
+    bound.inset(-badgeRadius - badgeInset, -badgeRadius - badgeInset)
+    canvas.clipRect(bound, Region.Op.REPLACE)
+    canvas.drawCircle(view.width.toFloat() + badgeInset, 0f - badgeInset, badgeRadius.toFloat(), badgePaint)
   }
 }

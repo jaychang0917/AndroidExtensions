@@ -25,7 +25,8 @@ class ImageView : ImageView {
   override fun draw(canvas: Canvas) {
     viewHelper.clipPath(canvas)
     super.draw(canvas)
-    viewHelper.drawPath(canvas)
+    viewHelper.drawBorder(canvas)
+    viewHelper.drawBadge(canvas)
   }
 
   override fun setScaleType(scaleType: ScaleType) {

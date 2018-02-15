@@ -9,11 +9,11 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:background="@color/colorPrimary"
-        app:view_border_width="10dp"
-        app:view_border_color="#257f56"
-        app:view_topLeftRadius="10dp"
-        app:view_topRightRadius="20dp"
-        app:view_bottomLeftRadius="30dp"
-        app:view_bottomRightRadius="40dp"/>
+        app:view_badgeColor="@color/colorAccent"
+        app:view_badgeInset="0dp"
+        app:view_badgeRadius="8dp"
+        app:view_borderColor="#25a501"
+        app:view_borderWidth="14dp"
+        app:view_radius="18dp" />
 
 </FrameLayout>
