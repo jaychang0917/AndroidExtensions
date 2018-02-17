@@ -4,6 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.jaychang.extensions.ui.Toolbar
+        android:layout_width="match_parent"
+        app:toolbar_leftIcon="@drawable/ic_back"
+        app:toolbar_title="Foo Bar"
+        app:toolbar_rightIcon="@drawable/reload"
+        app:toolbar_rightIcon2="@drawable/reload"
+        android:background="@color/colorAccent"
+        android:layout_height="wrap_content" />
+
     <com.jaychang.extensions.ui.LinearLayout
         android:layout_width="100dp"
         android:layout_height="100dp"

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- global widget style attributes -->
+    <attr name="toolbarTitleTextColor" format="reference|color" />
+    <attr name="toolbarTitleTextSize" format="reference|dimension" />
+    <attr name="toolbarTitleTextGravity">
+        <enum name="left" value="0" />
+        <enum name="center" value="1" />
+    </attr>
+    <attr name="toolbarTitleTextStyle">
+        <flag name="normal" value="0" />
+        <flag name="bold" value="1" />
+        <flag name="italic" value="2" />
+    </attr>
+    <attr name="toolbarTextColor" format="reference|color" />
+    <attr name="toolbarTextSize" format="reference|dimension" />
+    <attr name="toolbarTextStyle">
+        <flag name="normal" value="0" />
+        <flag name="bold" value="1" />
+        <flag name="italic" value="2" />
+    </attr>
+    <attr name="toolbarBackgroundColor" format="reference|color" />
+    <attr name="toolbarHeight" format="reference|dimension" />
+    <attr name="toolbarTitleSingleLine" format="reference|boolean" />
+    <attr name="toolbarTitleTextFont" format="reference|string" />
+    <attr name="toolbarTextFont" format="reference|string" />
+
+    <!-- widget style attributes -->
+    <declare-styleable name="Toolbar">
+        <attr name="toolbar_leftIcon" format="reference" />
+        <attr name="toolbar_leftText" format="reference|string" />
+        <attr name="toolbar_leftTextSize" format="dimension|reference" />
+        <attr name="toolbar_leftTextColor" format="reference|color" />
+        <attr name="toolbar_leftTextStyle">
+            <flag name="normal" value="0" />
+            <flag name="bold" value="1" />
+            <flag name="italic" value="2" />
+        </attr>
+        <attr name="toolbar_leftTextIcon" format="reference" />
+        <attr name="toolbar_leftTextIconPosition">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="toolbar_leftTextFont" format="reference|string" />
+
+        <attr name="toolbar_title" format="string" />
+        <attr name="toolbar_titleSingleLine" format="reference|boolean" />
+        <attr name="toolbar_titleTextSize" format="reference|dimension" />
+        <attr name="toolbar_titleTextColor" format="reference|color" />
+        <attr name="toolbar_titleTextStyle">
+            <flag name="normal" value="0" />
+            <flag name="bold" value="1" />
+            <flag name="italic" value="2" />
+        </attr>
+        <attr name="toolbar_titleTextIcon" format="reference" />
+        <attr name="toolbar_titleTextIconPosition">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="toolbar_titleTextGravity">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+        </attr>
+        <attr name="toolbar_titleTextFont" format="reference|string" />
+
+        <attr name="toolbar_rightIcon" format="reference" />
+        <attr name="toolbar_rightIcon2" format="reference" />
+        <attr name="toolbar_rightIcon3" format="reference" />
+        <attr name="toolbar_rightIcon4" format="reference" />
+        <attr name="toolbar_rightIcon5" format="reference" />
+        <attr name="toolbar_rightText" format="string" />
+        <attr name="toolbar_rightTextSize" format="reference|dimension" />
+        <attr name="toolbar_rightTextColor" format="reference|color" />
+        <attr name="toolbar_rightTextStyle">
+            <flag name="normal" value="0" />
+            <flag name="bold" value="1" />
+            <flag name="italic" value="2" />
+        </attr>
+        <attr name="toolbar_rightTextIcon" format="reference" />
+        <attr name="toolbar_rightTextIconPosition">
+            <enum name="right" value="0" />
+            <enum name="left" value="1" />
+        </attr>
+        <attr name="toolbar_rightTextFont" format="reference|string" />
+
+    </declare-styleable>
+
+</resources>

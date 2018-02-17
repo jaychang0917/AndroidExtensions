@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/rootView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    tools:background="#555"
+    tools:ignore="RtlHardcoded,ContentDescription"
+    tools:layout_height="56dp">
+
+    <ViewStub
+        android:id="@+id/leftIconStub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        android:inflatedId="@+id/leftIcon"
+        android:layout="@layout/toolbar_imagebutton" />
+
+    <ViewStub
+        android:id="@+id/leftTextStub"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:inflatedId="@+id/leftText"
+        android:layout="@layout/toolbar_textview" />
+
+    <ViewStub
+        android:id="@+id/titleStub"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:inflatedId="@+id/title"
+        android:layout="@layout/toolbar_textview" />
+
+    <ViewStub
+        android:id="@+id/rightTextStub"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:inflatedId="@+id/rightText"
+        android:layout="@layout/toolbar_textview" />
+
+    <ViewStub
+        android:id="@+id/rightIconStub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+        android:inflatedId="@+id/rightIcon"
+        android:layout="@layout/toolbar_imagebutton" />
+
+    <ViewStub
+        android:id="@+id/rightIcon2Stub"
+        style="@style/ToolbarIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/rightIcon"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:inflatedId="@+id/rightIcon2"
+        android:layout="@layout/toolbar_imagebutton" />
+
+    <ViewStub
+        android:id="@+id/rightIcon3Stub"
+        style="@style/ToolbarIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/rightIcon2"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:inflatedId="@+id/rightIcon3"
+        android:layout="@layout/toolbar_imagebutton" />
+
+    <ViewStub
+        android:id="@+id/rightIcon4Stub"
+        style="@style/ToolbarIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/rightIcon3"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:inflatedId="@+id/rightIcon4"
+        android:layout="@layout/toolbar_imagebutton" />
+
+    <ViewStub
+        android:id="@+id/rightIcon5Stub"
+        style="@style/ToolbarIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/rightIcon4"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:inflatedId="@+id/rightIcon5"
+        android:layout="@layout/toolbar_imagebutton" />
+
+</RelativeLayout>
