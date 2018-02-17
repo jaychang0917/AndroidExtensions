@@ -2,9 +2,11 @@ package com.jaychang.extensions.internal
 
 import android.content.Context
 import android.graphics.*
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
 import com.jaychang.extensions.R
+import com.jaychang.extensions.ui.BadgeConfig
 
 internal class ViewHelper {
   private lateinit var view: View
@@ -20,10 +22,9 @@ internal class ViewHelper {
   private var borderColor = 0
   private var borderPaint = Paint()
 
-  private var badgeColor = 0
-  private var badgeRadius = 0
-  private var badgeInset = 0
-  private var badgePaint = Paint()
+  var isBadgeVisible = false
+  var isBadgeDrawingRequested = false
+  var badgeConfig = BadgeConfig()
 
   fun init(view: View, ctx: Context, attrs: AttributeSet?) {
     this.view = view
@@ -37,10 +38,7 @@ internal class ViewHelper {
       R.attr.view_bottomLeftRadius, 0,
       R.attr.view_bottomRightRadius, 0,
       R.attr.view_borderWidth, 0,
-      R.attr.view_borderColor, 0,
-      R.attr.view_badgeRadius, 0,
-      R.attr.view_badgeColor, 0,
-      R.attr.view_badgeInset
+      R.attr.view_borderColor, 0
     )
     val typeArray = ctx.obtainStyledAttributes(attrs, viewAttrs)
 
@@ -53,17 +51,11 @@ internal class ViewHelper {
     borderWidth = typeArray.getDimensionPixelSize(10, 0)
     borderColor = typeArray.getColor(12, Color.TRANSPARENT)
 
-    badgeRadius = typeArray.getDimensionPixelSize(14, 0)
-    badgeColor = typeArray.getColor(16, Color.RED)
-    badgeInset = typeArray.getDimensionPixelSize(18, 0)
-
     typeArray.recycle()
 
     borderPaint.color = borderColor
     borderPaint.strokeWidth = borderWidth.toFloat()
     borderPaint.style = Paint.Style.STROKE
-
-    badgePaint.color = badgeColor
   }
 
   fun onSizeChanged(width: Int, height: Int) {
@@ -87,9 +79,27 @@ internal class ViewHelper {
   }
 
   fun drawBadge(canvas: Canvas) {
+    if (!isBadgeDrawingRequested) {
+      return
+    }
+
     val bound = canvas.clipBounds
-    bound.inset(-badgeRadius - badgeInset, -badgeRadius - badgeInset)
+    bound.inset(-badgeConfig.radius - badgeConfig.inset, -badgeConfig.radius - badgeConfig.inset)
     canvas.clipRect(bound, Region.Op.REPLACE)
-    canvas.drawCircle(view.width.toFloat() + badgeInset, 0f - badgeInset, badgeRadius.toFloat(), badgePaint)
+    val paint = Paint()
+    paint.color = if (isBadgeVisible) ContextCompat.getColor(view.context, badgeConfig.color) else Color.TRANSPARENT
+    canvas.drawCircle(view.width.toFloat() + badgeConfig.inset, 0f - badgeConfig.inset, badgeConfig.radius.toFloat(), paint)
+  }
+
+  fun showBadge(view: android.view.View) {
+    isBadgeVisible = true
+    isBadgeDrawingRequested = true
+    view.invalidate()
+  }
+
+  fun hideBadge(view: android.view.View) {
+    isBadgeVisible = false
+    isBadgeDrawingRequested = true
+    view.invalidate()
   }
 }

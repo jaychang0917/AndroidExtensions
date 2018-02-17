@@ -111,7 +111,7 @@ fun Activity.takeVideo(requestCode: Int): Boolean {
 
 fun Fragment.takeVideo(requestCode: Int): Boolean {
   val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-  if (intent.resolveActivity(activity.packageManager) != null) {
+  if (intent.resolveActivity(activity!!.packageManager) != null) {
     startActivityForResult(intent, requestCode)
     return true
   }

@@ -1,0 +1,94 @@
+package com.jaychang.extensions.ui
+
+import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Region
+import android.support.v4.content.ContextCompat
+import android.util.AttributeSet
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+import com.jaychang.extensions.R
+import com.jaychang.extensions.util.pxToSp
+
+class BottomNavigationView : BottomNavigationViewEx {
+  constructor(ctx: Context) : this(ctx, null, 0)
+  constructor(ctx: Context, attrs: AttributeSet?) : this(ctx, attrs, 0)
+  constructor(ctx: Context, attrs: AttributeSet?, defaultStyle: Int) : super(ctx, attrs, defaultStyle) {
+    val typedArray = context.theme
+      .obtainStyledAttributes(attrs, R.styleable.BottomNavigationView, defaultStyle, 0)
+
+    val isShiftModeEnabled = typedArray.getBoolean(R.styleable.BottomNavigationView_itemShiftModeEnabled, false)
+    val isIconOnly = typedArray.getBoolean(R.styleable.BottomNavigationView_itemIconOnly, false)
+    val isTextOnly = typedArray.getBoolean(R.styleable.BottomNavigationView_itemTextOnly, false)
+    val textSizePx = typedArray.getDimensionPixelSize(R.styleable.BottomNavigationView_itemTextSize, 0)
+
+    this.isShiftModeEnabled = isShiftModeEnabled
+    this.isIconOnly = isIconOnly
+    this.isTextOnly = isTextOnly
+    this.textSizeSp = pxToSp(textSizePx)
+  }
+
+  var isShiftModeEnabled = false
+    set(value) {
+      enableItemShiftingMode(value)
+      enableAnimation(value)
+      enableShiftingMode(value)
+    }
+
+  var isIconOnly = false
+    set(value) {
+      if (value) {
+        setTextVisibility(!value)
+      }
+    }
+
+  var isTextOnly = false
+    set(value) {
+      if (value) {
+        setIconVisibility(!value)
+      }
+    }
+
+  var textSizeSp = 0
+    set(value) {
+      if (value != 0) {
+        setTextSize(value.toFloat())
+      }
+    }
+
+  var badgeConfig = BadgeConfig()
+  private var badgeTargetView: android.widget.ImageView? = null
+  private var isBadgeVisible = false
+
+  override fun draw(canvas: Canvas) {
+    super.draw(canvas)
+    badgeTargetView?.let {
+      drawBadgeInternal(canvas, it, isBadgeVisible)
+    }
+  }
+
+  fun showBadge(pos: Int) {
+    badgeTargetView = getIconAt(pos)
+    isBadgeVisible = true
+    invalidate()
+  }
+
+  fun hideBadge(pos: Int) {
+    badgeTargetView = getIconAt(pos)
+    isBadgeVisible = false
+    invalidate()
+  }
+
+  private fun drawBadgeInternal(canvas: Canvas, view: android.widget.ImageView, isVisible: Boolean) {
+    val badgePaint = Paint()
+    badgePaint.color = if (isVisible) ContextCompat.getColor(context, badgeConfig.color) else Color.TRANSPARENT
+    val bound = canvas.clipBounds
+    bound.inset(-badgeConfig.radius - badgeConfig.inset, -badgeConfig.radius - badgeConfig.inset)
+    canvas.clipRect(bound, Region.Op.REPLACE)
+    val location = intArrayOf(0, 0)
+    view.getLocationOnScreen(location)
+    val offsetY = (height - itemHeight) / 2
+    canvas.drawCircle(location[0].toFloat() + view.width + badgeConfig.inset, view.top.toFloat() - badgeConfig.inset + offsetY, badgeConfig.radius.toFloat(), badgePaint)
+  }
+}

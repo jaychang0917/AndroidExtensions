@@ -25,4 +25,12 @@ class Button : Button {
     viewHelper.drawBorder(canvas)
     viewHelper.drawBadge(canvas)
   }
+
+  fun showBadge() {
+    viewHelper.showBadge(this)
+  }
+
+  fun hideBadge() {
+    viewHelper.hideBadge(this)
+  }
 }

@@ -85,7 +85,7 @@ fun Drawable.toBytes(): ByteArray? {
 
 fun @receiver:DrawableRes Int.toBytes(context: Context): ByteArray? {
   val drawable = ContextCompat.getDrawable(context, this)
-  return drawable.toBitmap()?.toBytes()
+  return drawable?.toBitmap()?.toBytes()
 }
 
 fun ByteArray.toDrawable(context: Context): Drawable? {
@@ -278,7 +278,7 @@ fun Drawable.tint(context: Context, @ColorRes color: Int): Drawable {
 /**
  * meta
  * */
-class ImageSize(width: Int, height: Int)
+data class ImageSize(val width: Int, val height: Int)
 
 fun Uri.imageSize(): ImageSize {
   val options = BitmapFactory.Options()

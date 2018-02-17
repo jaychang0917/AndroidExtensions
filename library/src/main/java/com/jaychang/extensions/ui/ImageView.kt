@@ -41,4 +41,12 @@ class ImageView : ImageView {
       else -> { super.setScaleType(scaleType) }
     }
   }
+
+  fun showBadge() {
+    viewHelper.showBadge(this)
+  }
+
+  fun hideBadge() {
+    viewHelper.hideBadge(this)
+  }
 }

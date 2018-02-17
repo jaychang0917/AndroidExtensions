@@ -114,7 +114,7 @@ fun Activity.takePhotoFromCamera(requestCode: Int): File? {
 }
 
 fun Fragment.takePhotoFromCamera(requestCode: Int): File? {
-  return internalTakePhotoFromCamera(activity, requestCode)
+  return internalTakePhotoFromCamera(activity!!, requestCode)
 }
 
 @TargetApi(18)

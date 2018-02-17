@@ -7,9 +7,6 @@
     <attr name="view_bottomRightRadius" format="dimension|reference" />
     <attr name="view_borderWidth" format="dimension|reference" />
     <attr name="view_borderColor" format="color|reference" />
-    <attr name="view_badgeRadius" format="dimension|reference" />
-    <attr name="view_badgeColor" format="color|reference" />
-    <attr name="view_badgeInset" format="dimension|reference" />
 
     <declare-styleable name="FrameLayout">
         <attr name="view_radius" />
@@ -19,9 +16,6 @@
         <attr name="view_bottomRightRadius" />
         <attr name="view_borderWidth" />
         <attr name="view_borderColor" />
-        <attr name="view_badgeRadius" />
-        <attr name="view_badgeColor" />
-        <attr name="view_badgeInset" />
     </declare-styleable>
 
     <declare-styleable name="LinearLayout">
@@ -32,9 +26,6 @@
         <attr name="view_bottomRightRadius" />
         <attr name="view_borderWidth" />
         <attr name="view_borderColor" />
-        <attr name="view_badgeRadius" />
-        <attr name="view_badgeColor" />
-        <attr name="view_badgeInset" />
     </declare-styleable>
 
     <declare-styleable name="RelativeLayout">
@@ -45,9 +36,6 @@
         <attr name="view_bottomRightRadius" />
         <attr name="view_borderWidth" />
         <attr name="view_borderColor" />
-        <attr name="view_badgeRadius" />
-        <attr name="view_badgeColor" />
-        <attr name="view_badgeInset" />
     </declare-styleable>
 
     <declare-styleable name="GridLayout">
@@ -58,9 +46,6 @@
         <attr name="view_bottomRightRadius" />
         <attr name="view_borderWidth" />
         <attr name="view_borderColor" />
-        <attr name="view_badgeRadius" />
-        <attr name="view_badgeColor" />
-        <attr name="view_badgeInset" />
     </declare-styleable>
 
     <declare-styleable name="ImageView">
@@ -71,9 +56,6 @@
         <attr name="view_bottomRightRadius" />
         <attr name="view_borderWidth" />
         <attr name="view_borderColor" />
-        <attr name="view_badgeRadius" />
-        <attr name="view_badgeColor" />
-        <attr name="view_badgeInset" />
     </declare-styleable>
 
     <declare-styleable name="TextView">
@@ -84,9 +66,6 @@
         <attr name="view_bottomRightRadius" />
         <attr name="view_borderWidth" />
         <attr name="view_borderColor" />
-        <attr name="view_badgeRadius" />
-        <attr name="view_badgeColor" />
-        <attr name="view_badgeInset" />
     </declare-styleable>
 
     <declare-styleable name="EditText">
@@ -97,9 +76,6 @@
         <attr name="view_bottomRightRadius" />
         <attr name="view_borderWidth" />
         <attr name="view_borderColor" />
-        <attr name="view_badgeRadius" />
-        <attr name="view_badgeColor" />
-        <attr name="view_badgeInset" />
     </declare-styleable>
 
     <declare-styleable name="Button">
@@ -110,9 +86,6 @@
         <attr name="view_bottomRightRadius" />
         <attr name="view_borderWidth" />
         <attr name="view_borderColor" />
-        <attr name="view_badgeRadius" />
-        <attr name="view_badgeColor" />
-        <attr name="view_badgeInset" />
     </declare-styleable>
 
     <declare-styleable name="View">
@@ -123,8 +96,5 @@
         <attr name="view_bottomRightRadius" />
         <attr name="view_borderWidth" />
         <attr name="view_borderColor" />
-        <attr name="view_badgeRadius" />
-        <attr name="view_badgeColor" />
-        <attr name="view_badgeInset" />
     </declare-styleable>
 </resources>

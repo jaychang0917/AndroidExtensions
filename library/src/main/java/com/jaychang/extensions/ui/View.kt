@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.View
 import com.jaychang.extensions.internal.ViewHelper
 
-class View: View {
+class View : View {
   private val viewHelper = ViewHelper()
 
   constructor(ctx: Context) : this(ctx, null, 0)
@@ -24,5 +24,13 @@ class View: View {
     super.draw(canvas)
     viewHelper.drawBorder(canvas)
     viewHelper.drawBadge(canvas)
+  }
+
+  fun showBadge() {
+    viewHelper.showBadge(this)
+  }
+
+  fun hideBadge() {
+    viewHelper.hideBadge(this)
   }
 }

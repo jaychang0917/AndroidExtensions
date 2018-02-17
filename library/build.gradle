@@ -5,11 +5,11 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.jaychang0917'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
     defaultConfig {
         minSdkVersion 17
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -23,8 +23,10 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:appcompat-v7:27.0.2'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     compile 'com.jakewharton.threetenabp:threetenabp:1.0.5'
     provided 'com.github.bumptech.glide:glide:4.1.1'
+    compile 'com.android.support:design:27.0.2'
+    compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
 }
