@@ -3,10 +3,10 @@ package com.jaychang.extensions.ui
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.widget.Button
+import android.widget.FrameLayout
 import com.jaychang.extensions.internal.ViewHelper
 
-class Button : Button {
+class FrameLayoutEx : FrameLayout {
   private val viewHelper = ViewHelper()
 
   constructor(ctx: Context) : this(ctx, null, 0)

@@ -4,9 +4,9 @@ import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import com.jaychang.extensions.ui.BadgeConfig
-import com.jaychang.extensions.ui.BottomNavigationView
+import com.jaychang.extensions.ui.BottomNavigationViewEx
 
-class BottomNavigationViewController(private val view: BottomNavigationView,
+class BottomNavigationViewController(private val view: BottomNavigationViewEx,
                                      private val fragmentManager: FragmentManager,
                                      private val fragmentProviders: List<(Int) -> Fragment>,
                                      @IdRes private val containerId: Int,

@@ -7,11 +7,10 @@ import android.graphics.Paint
 import android.graphics.Region
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
-import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
 import com.jaychang.extensions.R
 import com.jaychang.extensions.util.pxToSp
 
-class BottomNavigationView : BottomNavigationViewEx {
+class BottomNavigationViewEx : com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx {
   constructor(ctx: Context) : this(ctx, null, 0)
   constructor(ctx: Context, attrs: AttributeSet?) : this(ctx, attrs, 0)
   constructor(ctx: Context, attrs: AttributeSet?, defaultStyle: Int) : super(ctx, attrs, defaultStyle) {

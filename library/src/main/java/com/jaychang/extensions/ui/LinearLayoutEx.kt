@@ -3,10 +3,10 @@ package com.jaychang.extensions.ui
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.widget.TextView
+import android.widget.LinearLayout
 import com.jaychang.extensions.internal.ViewHelper
 
-class TextView : TextView {
+class LinearLayoutEx : LinearLayout {
   private val viewHelper = ViewHelper()
 
   constructor(ctx: Context) : this(ctx, null, 0)

@@ -3,10 +3,10 @@ package com.jaychang.extensions.ui
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.widget.RelativeLayout
+import android.widget.Button
 import com.jaychang.extensions.internal.ViewHelper
 
-class RelativeLayout : RelativeLayout {
+class ButtonEx : Button {
   private val viewHelper = ViewHelper()
 
   constructor(ctx: Context) : this(ctx, null, 0)

@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import com.jaychang.extensions.R;
 
-public class Toolbar extends RelativeLayout {
+public class ToolbarEx extends RelativeLayout {
   private final int WHITE = ContextCompat.getColor(getContext(), android.R.color.white);
 
   private ViewStub leftIconViewStub;
@@ -96,15 +96,15 @@ public class Toolbar extends RelativeLayout {
 
   private Drawable backgroundDrawable;
 
-  public Toolbar(Context context) {
+  public ToolbarEx(Context context) {
     this(context, null);
   }
 
-  public Toolbar(Context context, AttributeSet attrs) {
+  public ToolbarEx(Context context, AttributeSet attrs) {
     this(context, attrs, 0);
   }
 
-  public Toolbar(Context context, AttributeSet attrs, int defStyleAttr) {
+  public ToolbarEx(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
     inflateViews(context);
     initAttrs(context, attrs, defStyleAttr);
@@ -130,39 +130,39 @@ public class Toolbar extends RelativeLayout {
     final int PIXEL_SIZE_20 = sp2px(getContext(), 20);
 
     TypedArray typedArray = context.getTheme()
-      .obtainStyledAttributes(attrs, R.styleable.Toolbar, defStyleAttr, 0);
+      .obtainStyledAttributes(attrs, R.styleable.ToolbarEx, defStyleAttr, 0);
 
-    leftIcon = typedArray.getResourceId(R.styleable.Toolbar_toolbar_leftIcon, 0);
-    leftText = typedArray.getString(R.styleable.Toolbar_toolbar_leftText);
-    leftTextSize = typedArray.getDimensionPixelSize(R.styleable.Toolbar_toolbar_leftTextSize, PIXEL_SIZE_17);
-    leftTextIcon = typedArray.getResourceId(R.styleable.Toolbar_toolbar_leftTextIcon, 0);
-    leftTextIconPosition = typedArray.getInt(R.styleable.Toolbar_toolbar_leftTextIconPosition, 0);
-    leftTextColor = typedArray.getColorStateList(R.styleable.Toolbar_toolbar_leftTextColor);
-    leftTextStyle = typedArray.getInt(R.styleable.Toolbar_toolbar_leftTextStyle, 0);
-    leftTextFont = typedArray.getString(R.styleable.Toolbar_toolbar_leftTextFont);
+    leftIcon = typedArray.getResourceId(R.styleable.ToolbarEx_toolbar_leftIcon, 0);
+    leftText = typedArray.getString(R.styleable.ToolbarEx_toolbar_leftText);
+    leftTextSize = typedArray.getDimensionPixelSize(R.styleable.ToolbarEx_toolbar_leftTextSize, PIXEL_SIZE_17);
+    leftTextIcon = typedArray.getResourceId(R.styleable.ToolbarEx_toolbar_leftTextIcon, 0);
+    leftTextIconPosition = typedArray.getInt(R.styleable.ToolbarEx_toolbar_leftTextIconPosition, 0);
+    leftTextColor = typedArray.getColorStateList(R.styleable.ToolbarEx_toolbar_leftTextColor);
+    leftTextStyle = typedArray.getInt(R.styleable.ToolbarEx_toolbar_leftTextStyle, 0);
+    leftTextFont = typedArray.getString(R.styleable.ToolbarEx_toolbar_leftTextFont);
 
-    title = typedArray.getString(R.styleable.Toolbar_toolbar_title);
-    titleTextSize = typedArray.getDimensionPixelSize(R.styleable.Toolbar_toolbar_titleTextSize, PIXEL_SIZE_20);
-    titleTextIcon = typedArray.getResourceId(R.styleable.Toolbar_toolbar_titleTextIcon, 0);
-    titleTextIconPosition = typedArray.getInt(R.styleable.Toolbar_toolbar_titleTextIconPosition, 0);
-    titleTextColor = typedArray.getColorStateList(R.styleable.Toolbar_toolbar_titleTextColor);
-    isTitleSingleLine = typedArray.getBoolean(R.styleable.Toolbar_toolbar_titleSingleLine, true);
-    titleTextGravity = typedArray.getInt(R.styleable.Toolbar_toolbar_titleTextGravity, -1);
-    titleTextStyle = typedArray.getInt(R.styleable.Toolbar_toolbar_titleTextStyle, 0);
-    titleTextFont = typedArray.getString(R.styleable.Toolbar_toolbar_titleTextFont);
+    title = typedArray.getString(R.styleable.ToolbarEx_toolbar_title);
+    titleTextSize = typedArray.getDimensionPixelSize(R.styleable.ToolbarEx_toolbar_titleTextSize, PIXEL_SIZE_20);
+    titleTextIcon = typedArray.getResourceId(R.styleable.ToolbarEx_toolbar_titleTextIcon, 0);
+    titleTextIconPosition = typedArray.getInt(R.styleable.ToolbarEx_toolbar_titleTextIconPosition, 0);
+    titleTextColor = typedArray.getColorStateList(R.styleable.ToolbarEx_toolbar_titleTextColor);
+    isTitleSingleLine = typedArray.getBoolean(R.styleable.ToolbarEx_toolbar_titleSingleLine, true);
+    titleTextGravity = typedArray.getInt(R.styleable.ToolbarEx_toolbar_titleTextGravity, -1);
+    titleTextStyle = typedArray.getInt(R.styleable.ToolbarEx_toolbar_titleTextStyle, 0);
+    titleTextFont = typedArray.getString(R.styleable.ToolbarEx_toolbar_titleTextFont);
 
-    rightIcon = typedArray.getResourceId(R.styleable.Toolbar_toolbar_rightIcon, 0);
-    rightIcon2 = typedArray.getResourceId(R.styleable.Toolbar_toolbar_rightIcon2, 0);
-    rightIcon3 = typedArray.getResourceId(R.styleable.Toolbar_toolbar_rightIcon3, 0);
-    rightIcon4 = typedArray.getResourceId(R.styleable.Toolbar_toolbar_rightIcon4, 0);
-    rightIcon5 = typedArray.getResourceId(R.styleable.Toolbar_toolbar_rightIcon5, 0);
-    rightText = typedArray.getString(R.styleable.Toolbar_toolbar_rightText);
-    rightTextSize = typedArray.getDimensionPixelSize(R.styleable.Toolbar_toolbar_rightTextSize, PIXEL_SIZE_17);
-    rightTextIcon = typedArray.getResourceId(R.styleable.Toolbar_toolbar_rightTextIcon, 0);
-    rightTextIconPosition = typedArray.getInt(R.styleable.Toolbar_toolbar_rightTextIconPosition, 0);
-    rightTextColor = typedArray.getColorStateList(R.styleable.Toolbar_toolbar_rightTextColor);
-    rightTextStyle = typedArray.getInt(R.styleable.Toolbar_toolbar_rightTextStyle, 0);
-    rightTextFont = typedArray.getString(R.styleable.Toolbar_toolbar_rightTextFont);
+    rightIcon = typedArray.getResourceId(R.styleable.ToolbarEx_toolbar_rightIcon, 0);
+    rightIcon2 = typedArray.getResourceId(R.styleable.ToolbarEx_toolbar_rightIcon2, 0);
+    rightIcon3 = typedArray.getResourceId(R.styleable.ToolbarEx_toolbar_rightIcon3, 0);
+    rightIcon4 = typedArray.getResourceId(R.styleable.ToolbarEx_toolbar_rightIcon4, 0);
+    rightIcon5 = typedArray.getResourceId(R.styleable.ToolbarEx_toolbar_rightIcon5, 0);
+    rightText = typedArray.getString(R.styleable.ToolbarEx_toolbar_rightText);
+    rightTextSize = typedArray.getDimensionPixelSize(R.styleable.ToolbarEx_toolbar_rightTextSize, PIXEL_SIZE_17);
+    rightTextIcon = typedArray.getResourceId(R.styleable.ToolbarEx_toolbar_rightTextIcon, 0);
+    rightTextIconPosition = typedArray.getInt(R.styleable.ToolbarEx_toolbar_rightTextIconPosition, 0);
+    rightTextColor = typedArray.getColorStateList(R.styleable.ToolbarEx_toolbar_rightTextColor);
+    rightTextStyle = typedArray.getInt(R.styleable.ToolbarEx_toolbar_rightTextStyle, 0);
+    rightTextFont = typedArray.getString(R.styleable.ToolbarEx_toolbar_rightTextFont);
 
     typedArray.recycle();
 

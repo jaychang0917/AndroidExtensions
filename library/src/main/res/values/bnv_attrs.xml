@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="BottomNavigationView">
+    <declare-styleable name="BottomNavigationViewEx">
         <attr name="itemTextOnly" format="boolean|reference" />
         <attr name="itemIconOnly" format="boolean|reference" />
         <attr name="itemShiftModeEnabled" format="boolean|reference" />

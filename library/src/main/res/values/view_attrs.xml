@@ -8,7 +8,7 @@
     <attr name="view_borderWidth" format="dimension|reference" />
     <attr name="view_borderColor" format="color|reference" />
 
-    <declare-styleable name="FrameLayout">
+    <declare-styleable name="FrameLayoutEx">
         <attr name="view_radius" />
         <attr name="view_topLeftRadius" />
         <attr name="view_topRightRadius" />
@@ -18,7 +18,7 @@
         <attr name="view_borderColor" />
     </declare-styleable>
 
-    <declare-styleable name="LinearLayout">
+    <declare-styleable name="LinearLayoutEx">
         <attr name="view_radius" />
         <attr name="view_topLeftRadius" />
         <attr name="view_topRightRadius" />
@@ -28,7 +28,7 @@
         <attr name="view_borderColor" />
     </declare-styleable>
 
-    <declare-styleable name="RelativeLayout">
+    <declare-styleable name="RelativeLayoutEx">
         <attr name="view_radius" />
         <attr name="view_topLeftRadius" />
         <attr name="view_topRightRadius" />
@@ -38,7 +38,7 @@
         <attr name="view_borderColor" />
     </declare-styleable>
 
-    <declare-styleable name="GridLayout">
+    <declare-styleable name="GridLayoutEx">
         <attr name="view_radius" />
         <attr name="view_topLeftRadius" />
         <attr name="view_topRightRadius" />
@@ -48,7 +48,7 @@
         <attr name="view_borderColor" />
     </declare-styleable>
 
-    <declare-styleable name="ImageView">
+    <declare-styleable name="ImageViewEx">
         <attr name="view_radius" />
         <attr name="view_topLeftRadius" />
         <attr name="view_topRightRadius" />
@@ -58,7 +58,7 @@
         <attr name="view_borderColor" />
     </declare-styleable>
 
-    <declare-styleable name="TextView">
+    <declare-styleable name="TextViewEx">
         <attr name="view_radius" />
         <attr name="view_topLeftRadius" />
         <attr name="view_topRightRadius" />
@@ -68,7 +68,7 @@
         <attr name="view_borderColor" />
     </declare-styleable>
 
-    <declare-styleable name="EditText">
+    <declare-styleable name="EditTextEx">
         <attr name="view_radius" />
         <attr name="view_topLeftRadius" />
         <attr name="view_topRightRadius" />
@@ -78,7 +78,7 @@
         <attr name="view_borderColor" />
     </declare-styleable>
 
-    <declare-styleable name="Button">
+    <declare-styleable name="ButtonEx">
         <attr name="view_radius" />
         <attr name="view_topLeftRadius" />
         <attr name="view_topRightRadius" />
@@ -88,7 +88,7 @@
         <attr name="view_borderColor" />
     </declare-styleable>
 
-    <declare-styleable name="View">
+    <declare-styleable name="ViewEx">
         <attr name="view_radius" />
         <attr name="view_topLeftRadius" />
         <attr name="view_topRightRadius" />

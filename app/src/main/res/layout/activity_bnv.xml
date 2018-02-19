@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.jaychang.extensions.ui.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.jaychang.extensions.ui.RelativeLayoutEx xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.jaychang.extensions.ui.Toolbar
+    <com.jaychang.extensions.ui.ToolbarEx
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
         app:toolbar_rightIcon2="@drawable/reload"
         app:toolbar_title="Foo Bar" />
 
-    <com.jaychang.extensions.ui.BottomNavigationView
+    <com.jaychang.extensions.ui.BottomNavigationViewEx
         android:id="@+id/bottomNavView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,4 +32,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</com.jaychang.extensions.ui.RelativeLayout>
+</com.jaychang.extensions.ui.RelativeLayoutEx>

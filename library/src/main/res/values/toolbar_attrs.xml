@@ -26,7 +26,7 @@
     <attr name="toolbarTextFont" format="reference|string" />
 
     <!-- widget style attributes -->
-    <declare-styleable name="Toolbar">
+    <declare-styleable name="ToolbarEx">
         <attr name="toolbar_leftIcon" format="reference" />
         <attr name="toolbar_leftText" format="reference|string" />
         <attr name="toolbar_leftTextSize" format="dimension|reference" />
