@@ -8,7 +8,6 @@ import android.graphics.Region
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import com.jaychang.extensions.R
-import com.jaychang.extensions.util.pxToSp
 
 class BottomNavigationViewEx : com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx {
   constructor(ctx: Context) : this(ctx, null, 0)
@@ -17,15 +16,15 @@ class BottomNavigationViewEx : com.ittianyu.bottomnavigationviewex.BottomNavigat
     val typedArray = context.theme
       .obtainStyledAttributes(attrs, R.styleable.BottomNavigationView, defaultStyle, 0)
 
-    val isShiftModeEnabled = typedArray.getBoolean(R.styleable.BottomNavigationView_itemShiftModeEnabled, false)
-    val isIconOnly = typedArray.getBoolean(R.styleable.BottomNavigationView_itemIconOnly, false)
-    val isTextOnly = typedArray.getBoolean(R.styleable.BottomNavigationView_itemTextOnly, false)
-    val textSizePx = typedArray.getDimensionPixelSize(R.styleable.BottomNavigationView_itemTextSize, 0)
+    val isShiftModeEnabled = typedArray.getBoolean(R.styleable.BottomNavigationViewEx_itemShiftModeEnabled, false)
+    val isIconOnly = typedArray.getBoolean(R.styleable.BottomNavigationViewEx_itemIconOnly, false)
+    val isTextOnly = typedArray.getBoolean(R.styleable.BottomNavigationViewEx_itemTextOnly, false)
+    val textSizePx = typedArray.getDimensionPixelSize(R.styleable.BottomNavigationViewEx_itemTextSize, 0)
 
     this.isShiftModeEnabled = isShiftModeEnabled
     this.isIconOnly = isIconOnly
     this.isTextOnly = isTextOnly
-    this.textSizeSp = pxToSp(textSizePx)
+    this.textSizeSp = px2sp(context, textSizePx.toFloat())
   }
 
   var isShiftModeEnabled = false
@@ -89,5 +88,10 @@ class BottomNavigationViewEx : com.ittianyu.bottomnavigationviewex.BottomNavigat
     view.getLocationOnScreen(location)
     val offsetY = (height - itemHeight) / 2
     canvas.drawCircle(location[0].toFloat() + view.width + badgeConfig.inset, view.top.toFloat() - badgeConfig.inset + offsetY, badgeConfig.radius.toFloat(), badgePaint)
+  }
+
+  private fun px2sp(context: Context, px: Float): Int {
+    val fontScale = context.applicationContext.resources.displayMetrics.scaledDensity
+    return (px / fontScale + 0.5f).toInt()
   }
 }
