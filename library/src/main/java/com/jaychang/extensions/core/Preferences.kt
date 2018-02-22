@@ -8,19 +8,19 @@ import kotlin.reflect.KProperty
 
 /**
  *  Example:
-    object MySharePreference: Preference(context) {
-      var name by PreferenceDelegate<String>()
-      var userId by PreferenceDelegate<Long>()
+    object MyPreferences: Preferences(context) {
+      var name by Delegate<String>()
+      var userId by Delegate<Long>()
     }
  * */
 
-abstract class Preference(context: Context) {
+abstract class Preferences(context: Context) {
 
   private val sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
   private val keyPrefix = context.packageName
 
   @Suppress("UNCHECKED_CAST")
-  inner class PreferenceDelegate<T: Any> : ReadWriteProperty<Any?, T> {
+  inner class Delegate<T: Any> : ReadWriteProperty<Any?, T> {
     private var value: T? = null
     
     override fun getValue(thisRef: Any?, property: KProperty<*>): T {
