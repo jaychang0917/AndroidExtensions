@@ -11,20 +11,20 @@ import com.jaychang.extensions.ui.BadgeConfig
 internal class ViewHelper {
   private lateinit var view: View
 
-  private var radius = 0f
-  private var topLeftRadius = 0f
-  private var topRightRadius = 0f
-  private var bottomLeftRadius = 0f
-  private var bottomRightRadius = 0f
+  var radius = 0f
+  var topLeftRadius = 0f
+  var topRightRadius = 0f
+  var bottomLeftRadius = 0f
+  var bottomRightRadius = 0f
   private var path = Path()
 
-  private var borderWidth = 0
-  private var borderColor = 0
+  var borderWidth = 0
+  var borderColor = 0
   private var borderPaint = Paint()
 
   var isBadgeVisible = false
-  var isBadgeDrawingRequested = false
-  var badgeConfig = BadgeConfig()
+  private var isBadgeDrawingRequested = false
+  private var badgeConfig = BadgeConfig()
 
   fun init(view: View, ctx: Context, attrs: AttributeSet?) {
     this.view = view
