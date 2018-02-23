@@ -53,6 +53,7 @@
             <flag name="italic" value="2" />
         </attr>
         <attr name="toolbar_titleTextIcon" format="reference" />
+        <attr name="toolbar_titleIcon" format="reference" />
         <attr name="toolbar_titleTextIconPosition">
             <enum name="left" value="0" />
             <enum name="right" value="1" />

@@ -33,6 +33,13 @@
         android:layout="@layout/toolbar_textview" />
 
     <ViewStub
+        android:id="@+id/titleIconStub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inflatedId="@+id/title"
+        android:layout="@layout/toolbar_imageview" />
+
+    <ViewStub
         android:id="@+id/rightTextStub"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

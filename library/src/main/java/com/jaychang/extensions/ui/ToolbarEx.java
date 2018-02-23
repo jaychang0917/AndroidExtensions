@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.Px;
 import android.support.annotation.StringRes;
@@ -29,6 +30,7 @@ public class ToolbarEx extends RelativeLayout {
   private ViewStub leftIconViewStub;
   private ViewStub leftTextViewStub;
   private ViewStub titleTextViewStub;
+  private ViewStub titleIconViewStub;
   private ViewStub rightTextViewStub;
   private ViewStub rightIconViewStub;
   private ViewStub rightIcon2ViewStub;
@@ -38,6 +40,7 @@ public class ToolbarEx extends RelativeLayout {
   private ImageButton leftIconView;
   private TextView leftTextView;
   private TextView titleTextView;
+  private ImageView titleIconView;
   private TextView rightTextView;
   private ImageButton rightIconView;
   private ImageButton rightIcon2View;
@@ -60,6 +63,7 @@ public class ToolbarEx extends RelativeLayout {
   private int titleTextStyle;
   private String titleTextFont;
   private int titleTextIcon;
+  private int titleIcon;
   private int titleTextIconPosition;
   private int titleTextGravity;
   private ColorStateList titleTextColor;
@@ -90,9 +94,10 @@ public class ToolbarEx extends RelativeLayout {
   private int toolbarBackgroundColor;
   private int toolbarHeight;
   private boolean toolbarTitleSingleLine;
-  private boolean isTitleComponentInited = true;
-  private boolean isLeftComponentTextInited = true;
-  private boolean isRightComponentTextInited = true;
+  private boolean isTitleComponentInitialized = true;
+  private boolean isTitleIconComponentInitialized = true;
+  private boolean isLeftComponentTextInitialized = true;
+  private boolean isRightComponentTextInitialized = true;
 
   private Drawable backgroundDrawable;
 
@@ -116,6 +121,7 @@ public class ToolbarEx extends RelativeLayout {
     leftIconViewStub = view.findViewById(R.id.leftIconStub);
     leftTextViewStub = view.findViewById(R.id.leftTextStub);
     titleTextViewStub = view.findViewById(R.id.titleStub);
+    titleIconViewStub = view.findViewById(R.id.titleIconStub);
     rightIconViewStub = view.findViewById(R.id.rightIconStub);
     rightIcon2ViewStub = view.findViewById(R.id.rightIcon2Stub);
     rightIcon3ViewStub = view.findViewById(R.id.rightIcon3Stub);
@@ -142,6 +148,7 @@ public class ToolbarEx extends RelativeLayout {
     leftTextFont = typedArray.getString(R.styleable.ToolbarEx_toolbar_leftTextFont);
 
     title = typedArray.getString(R.styleable.ToolbarEx_toolbar_title);
+    titleIcon = typedArray.getResourceId(R.styleable.ToolbarEx_toolbar_titleIcon, 0);
     titleTextSize = typedArray.getDimensionPixelSize(R.styleable.ToolbarEx_toolbar_titleTextSize, PIXEL_SIZE_20);
     titleTextIcon = typedArray.getResourceId(R.styleable.ToolbarEx_toolbar_titleTextIcon, 0);
     titleTextIconPosition = typedArray.getInt(R.styleable.ToolbarEx_toolbar_titleTextIconPosition, 0);
@@ -218,6 +225,7 @@ public class ToolbarEx extends RelativeLayout {
     initLeftIcon();
     initLeftText();
     initTitle();
+    initTitleIcon();
     initRightIcon();
     initRightText();
     initBackground();
@@ -234,7 +242,7 @@ public class ToolbarEx extends RelativeLayout {
       setLeftText(leftText);
       initLeftTextComponent();
     } else {
-      isLeftComponentTextInited = false;
+      isLeftComponentTextInitialized = false;
     }
   }
 
@@ -270,7 +278,7 @@ public class ToolbarEx extends RelativeLayout {
       setLeftTextSize(toolbarTextSize);
     }
 
-    isLeftComponentTextInited = true;
+    isLeftComponentTextInitialized = true;
   }
 
   private void initTitle() {
@@ -278,7 +286,7 @@ public class ToolbarEx extends RelativeLayout {
       setTitle(title);
       initTitleComponent();
     } else {
-      isTitleComponentInited = false;
+      isTitleComponentInitialized = false;
     }
   }
 
@@ -318,22 +326,22 @@ public class ToolbarEx extends RelativeLayout {
     }
 
     if (toolbarTitleTextGravity == 0){
-      setLeftMargin();
+      setTitleLeftMargin();
     } else if (toolbarTitleTextGravity == 1) {
-      setLeftMargin();
+      setTitleLeftMargin();
       alightTitleCenter();
     }
 
     if (titleTextGravity == 0) {
-      setLeftMargin();
+      setTitleLeftMargin();
     } else if (titleTextGravity == 1) {
       alightTitleCenter();
     } else if (toolbarTitleTextGravity == 0){
-      setLeftMargin();
+      setTitleLeftMargin();
     } else if (toolbarTitleTextGravity == 1) {
       alightTitleCenter();
     } else {
-      setLeftMargin();
+      setTitleLeftMargin();
     }
 
     if (toolbarTitleSingleLine) {
@@ -342,7 +350,21 @@ public class ToolbarEx extends RelativeLayout {
       setTitleSingleLine(isTitleSingleLine);
     }
 
-    isTitleComponentInited = true;
+    isTitleComponentInitialized = true;
+  }
+
+  private void initTitleIcon() {
+    if (titleIcon != 0) {
+      setTitleIcon(titleIcon);
+      initTitleIconComponent();
+    } else {
+      isTitleIconComponentInitialized = false;
+    }
+  }
+
+  private void initTitleIconComponent() {
+    alightTitleIconCenter();
+    isTitleIconComponentInitialized = true;
   }
 
   private void initRightIcon() {
@@ -368,7 +390,7 @@ public class ToolbarEx extends RelativeLayout {
       setRightText(rightText);
       initRightTextComponent();
     } else {
-      isRightComponentTextInited = false;
+      isRightComponentTextInitialized = false;
     }
   }
 
@@ -405,7 +427,7 @@ public class ToolbarEx extends RelativeLayout {
       setRightTextSize(toolbarTextSize);
     }
 
-    isRightComponentTextInited = true;
+    isRightComponentTextInitialized = true;
   }
 
   private void initBackground() {
@@ -430,13 +452,21 @@ public class ToolbarEx extends RelativeLayout {
 
   public void setTitle(CharSequence title) {
     inflateTitleViewIfNeed();
-    if (!isTitleComponentInited) {
+    if (!isTitleComponentInitialized) {
       initTitleComponent();
     }
     titleTextView.setText(title);
   }
 
-  public void setLeftMargin() {
+  public void setTitleIcon(@DrawableRes int titleIcon) {
+    inflateTitleIconViewIfNeed();
+    if (!isTitleIconComponentInitialized) {
+      initTitleIconComponent();
+    }
+    titleIconView.setBackgroundResource(titleIcon);
+  }
+
+  public void setTitleLeftMargin() {
     inflateTitleViewIfNeed();
     LayoutParams params = ((LayoutParams) titleTextView.getLayoutParams());
     params.leftMargin = dp2px(getContext(), 72 - 16);
@@ -450,7 +480,14 @@ public class ToolbarEx extends RelativeLayout {
     titleTextView.setLayoutParams(params);
   }
 
-  public void setTitleTextIcon(int titleTextIcon) {
+  private void alightTitleIconCenter() {
+    inflateTitleIconViewIfNeed();
+    LayoutParams params = ((LayoutParams) titleIconView.getLayoutParams());
+    params.addRule(RelativeLayout.CENTER_IN_PARENT);
+    titleIconView.setLayoutParams(params);
+  }
+
+  public void setTitleTextIcon(@DrawableRes int titleTextIcon) {
     inflateTitleViewIfNeed();
     if (titleTextIconPosition == 0) {
       titleTextView.setCompoundDrawablesWithIntrinsicBounds(titleTextIcon, 0, 0, 0);
@@ -502,19 +539,19 @@ public class ToolbarEx extends RelativeLayout {
   /**
    * left
    */
-  public void setLeftText(int stringRes) {
+  public void setLeftText(@StringRes int stringRes) {
     setLeftText(getResources().getString(stringRes));
   }
 
   public void setLeftText(CharSequence text) {
     inflateLeftTextViewIfNeed();
-    if (!isLeftComponentTextInited) {
+    if (!isLeftComponentTextInitialized) {
       initLeftTextComponent();
     }
     leftTextView.setText(text);
   }
 
-  public void setLeftTextIcon(int leftTextIcon) {
+  public void setLeftTextIcon(@DrawableRes int leftTextIcon) {
     inflateLeftTextViewIfNeed();
     if (leftTextIconPosition == 0) {
       leftTextView.setCompoundDrawablesWithIntrinsicBounds(leftTextIcon, 0, 0, 0);
@@ -551,7 +588,7 @@ public class ToolbarEx extends RelativeLayout {
     leftTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
   }
 
-  public void setLeftTextIcon(int leftTextIcon, boolean isLeft) {
+  public void setLeftTextIcon(@DrawableRes int leftTextIcon, boolean isLeft) {
     this.leftTextIconPosition = isLeft ? 0 : 1;
     setLeftTextIcon(leftTextIcon);
   }
@@ -561,7 +598,7 @@ public class ToolbarEx extends RelativeLayout {
     leftTextView.setOnClickListener(listener);
   }
 
-  public void setLeftIcon(int drawableRes) {
+  public void setLeftIcon(@DrawableRes int drawableRes) {
     inflateLeftIconViewIfNeed();
     leftIconView.setImageResource(drawableRes);
   }
@@ -574,19 +611,19 @@ public class ToolbarEx extends RelativeLayout {
   /**
    * right
    */
-  public void setRightText(int stringRes) {
+  public void setRightText(@StringRes int stringRes) {
     setRightText(getResources().getString(stringRes));
   }
 
   public void setRightText(CharSequence text) {
     inflateRightTextViewIfNeed();
-    if (!isRightComponentTextInited) {
+    if (!isRightComponentTextInitialized) {
       initRightTextComponent();
     }
     rightTextView.setText(text);
   }
 
-  public void setRightTextIcon(int rightTextIcon) {
+  public void setRightTextIcon(@DrawableRes int rightTextIcon) {
     inflateRightTextViewIfNeed();
     if (rightTextIconPosition == 0) {
       rightTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, rightTextIcon, 0);
@@ -595,7 +632,7 @@ public class ToolbarEx extends RelativeLayout {
     }
   }
 
-  public void setRightTextIcon(int rightTextIcon, boolean isRight) {
+  public void setRightTextIcon(@DrawableRes int rightTextIcon, boolean isRight) {
     this.rightTextIconPosition = isRight ? 0 : 1;
     setRightTextIcon(rightTextIcon);
   }
@@ -623,27 +660,27 @@ public class ToolbarEx extends RelativeLayout {
     setRightTextStyle(null, typeface);
   }
 
-  public void setRightIcon(int drawableRes) {
+  public void setRightIcon(@DrawableRes int drawableRes) {
     inflateRightIconViewIfNeed();
     rightIconView.setImageResource(drawableRes);
   }
 
-  public void setRightIcon2(int drawableRes) {
+  public void setRightIcon2(@DrawableRes int drawableRes) {
     inflateRightIcon2ViewIfNeed();
     rightIcon2View.setImageResource(drawableRes);
   }
 
-  public void setRightIcon3(int drawableRes) {
+  public void setRightIcon3(@DrawableRes int drawableRes) {
     inflateRightIcon3ViewIfNeed();
     rightIcon3View.setImageResource(drawableRes);
   }
 
-  public void setRightIcon4(int drawableRes) {
+  public void setRightIcon4(@DrawableRes int drawableRes) {
     inflateRightIcon4ViewIfNeed();
     rightIcon4View.setImageResource(drawableRes);
   }
 
-  public void setRightIcon5(int drawableRes) {
+  public void setRightIcon5(@DrawableRes int drawableRes) {
     inflateRightIcon5ViewIfNeed();
     rightIcon5View.setImageResource(drawableRes);
   }
@@ -730,6 +767,10 @@ public class ToolbarEx extends RelativeLayout {
     titleTextView = inflateIfNeed(titleTextView, titleTextViewStub);
   }
 
+  private void inflateTitleIconViewIfNeed() {
+    titleIconView = inflateIfNeed(titleIconView, titleIconViewStub);
+  }
+
   /**
    * getters
    */
@@ -743,6 +784,10 @@ public class ToolbarEx extends RelativeLayout {
 
   public TextView getTitleTextView() {
     return titleTextView;
+  }
+
+  public ImageView getTitleImageView() {
+    return titleIconView;
   }
 
   public ImageView getRightIconView() {
