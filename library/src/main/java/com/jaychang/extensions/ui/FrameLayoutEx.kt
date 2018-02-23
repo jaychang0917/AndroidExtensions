@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import com.jaychang.extensions.internal.ViewHelper
 
-class FrameLayoutEx : FrameLayout {
+open class FrameLayoutEx : FrameLayout {
   private val viewHelper = ViewHelper()
 
   constructor(ctx: Context) : this(ctx, null, 0)

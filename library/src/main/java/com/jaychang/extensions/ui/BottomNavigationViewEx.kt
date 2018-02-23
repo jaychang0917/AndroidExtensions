@@ -9,7 +9,7 @@ import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import com.jaychang.extensions.R
 
-class BottomNavigationViewEx : com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx {
+open class BottomNavigationViewEx : com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx {
   constructor(ctx: Context) : this(ctx, null, 0)
   constructor(ctx: Context, attrs: AttributeSet?) : this(ctx, attrs, 0)
   constructor(ctx: Context, attrs: AttributeSet?, defaultStyle: Int) : super(ctx, attrs, defaultStyle) {

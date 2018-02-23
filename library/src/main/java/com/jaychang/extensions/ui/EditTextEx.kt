@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.widget.EditText
 import com.jaychang.extensions.internal.ViewHelper
 
-class EditTextEx : EditText {
+open class EditTextEx : EditText {
   private val viewHelper = ViewHelper()
 
   constructor(ctx: Context) : this(ctx, null, 0)

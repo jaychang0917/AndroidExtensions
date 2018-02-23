@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import com.jaychang.extensions.internal.ViewHelper
 
-class ImageViewEx : ImageView {
+open class ImageViewEx : ImageView {
   private val viewHelper = ViewHelper()
 
   constructor(ctx: Context) : this(ctx, null, 0)

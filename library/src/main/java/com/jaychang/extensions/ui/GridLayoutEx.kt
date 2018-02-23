@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.widget.GridLayout
 import com.jaychang.extensions.internal.ViewHelper
 
-class GridLayoutEx : GridLayout {
+open class GridLayoutEx : GridLayout {
   private val viewHelper = ViewHelper()
 
   constructor(ctx: Context) : this(ctx, null, 0)
