@@ -4,19 +4,30 @@ import android.content.Context
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.net.Uri
-import android.os.AsyncTask
+import android.os.CountDownTimer
 import android.support.annotation.RawRes
 import java.io.File
 
 class AudioPlayer(val context: Context) {
 
-  interface Callback {
-    fun onCompletion()
-    fun onError()
-  }
-
-  private lateinit var player: MediaPlayer
+  private var _player: MediaPlayer? = null
+  private val player: MediaPlayer
+    get() = _player!!
   private val appContext = context.applicationContext
+  private var isStartMode = true
+  private lateinit var playbackTimer: CountDownTimer
+
+  var onCompletion: (() -> Unit)? = null
+  var onError: (() -> Unit)? = null
+  var onPlaybackTimeMillis: ((Int) -> Unit)? = null
+  var onPlaybackPercentage: ((Float) -> Unit)? = null
+  var resumeMusic: Boolean = true
+
+  val isPlaying: Boolean
+    get() = player.isPlaying
+
+  val duration: Int
+    get() = player.duration
 
   private fun requestAudioFocus(): Boolean {
     val audioManager = appContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
@@ -29,69 +40,127 @@ class AudioPlayer(val context: Context) {
     audioManager.abandonAudioFocus(null)
   }
 
-  private fun play(@RawRes rawRes: Int?, file: File?, uri: Uri?, resumeMusic: Boolean = true, callback: Callback? = null) {
+  private fun start(@RawRes rawRes: Int? = null, file: File? = null, uri: Uri? = null) {
     if (!requestAudioFocus()) {
       return
     }
 
     stop()
 
-    AsyncTask.execute {
-      rawRes?.let {
-        player = MediaPlayer.create(appContext, rawRes)
-      }
-      file?.let {
-        player = MediaPlayer.create(appContext, Uri.fromFile(file))
-      }
-      uri?.let {
-        player = MediaPlayer.create(appContext, uri)
-      }
+    rawRes?.let {
+      _player = MediaPlayer.create(appContext, rawRes)
+    }
+    file?.let {
+      _player = MediaPlayer.create(appContext, Uri.fromFile(file))
+    }
+    uri?.let {
+      _player = MediaPlayer.create(appContext, uri)
+    }
 
-      player.setOnCompletionListener { _ ->
-        callback?.onCompletion()
-        if (resumeMusic) {
-          abandonAudioFocus()
-        }
+    player.setOnCompletionListener { _ ->
+      onCompletion?.invoke()
+      if (resumeMusic) {
+        abandonAudioFocus()
       }
+    }
 
-      player.setOnErrorListener { _, _, _ ->
-        callback?.onError()
-        if (resumeMusic) {
-          abandonAudioFocus()
-        }
-        true
+    player.setOnErrorListener { _, _, _ ->
+      onError?.invoke()
+      if (resumeMusic) {
+        abandonAudioFocus()
       }
+      true
+    }
 
+    isStartMode = true
+
+    start()
+
+    isStartMode = false
+  }
+
+  private fun start() {
+    try {
       player.start()
+      startPlaybackTimer()
+    } catch (e: IllegalStateException) {
+      player.release()
     }
   }
 
-  fun play(@RawRes rawRes: Int, resumeMusic: Boolean = true, callback: Callback? = null) {
-    play(rawRes = rawRes, resumeMusic = resumeMusic, callback = callback)
+  private fun startPlaybackTimer() {
+    playbackTimer = object: CountDownTimer((player.duration - player.currentPosition).toLong(), 1000L) {
+      override fun onFinish() {
+        onPlaybackTimeMillis?.invoke(player.duration)
+        onPlaybackPercentage?.invoke(100f)
+      }
+
+      override fun onTick(millisUntilFinished: Long) {
+        onPlaybackTimeMillis?.invoke(player.currentPosition)
+        onPlaybackPercentage?.invoke(player.currentPosition.toFloat() / player.duration.toFloat() * 100)
+      }
+    }
+    playbackTimer.start()
   }
 
-  fun play(file: File, resumeMusic: Boolean = true, callback: Callback? = null) {
-    play(file = file, resumeMusic = resumeMusic, callback = callback)
+  private fun cancelPlaybackTimer() {
+     playbackTimer.cancel()
   }
 
-  fun play(uri: Uri, resumeMusic: Boolean = true, callback: Callback? = null) {
-    play(uri = uri, resumeMusic = resumeMusic, callback = callback)
+  fun play(@RawRes rawRes: Int) {
+    if (isStartMode) {
+      start(rawRes = rawRes)
+    } else {
+      start()
+    }
+  }
+
+  fun play(file: File) {
+    if (isStartMode) {
+      start(file = file)
+    } else {
+      start()
+    }
+  }
+
+  fun play(uri: Uri) {
+    if (isStartMode) {
+      start(uri = uri)
+    } else {
+      start()
+    }
   }
 
   fun stop() {
-    if (!player.isPlaying) {
+    if (_player == null || !player.isPlaying) {
       return
     }
 
-    player.stop()
+    try {
+      player.stop()
+    } catch (e: IllegalStateException) {
+    }
     player.reset()
     player.release()
     player.setOnCompletionListener(null)
     player.setOnErrorListener(null)
+    _player = null
+
+    isStartMode = true
+
+    cancelPlaybackTimer()
   }
 
-  fun isPlaying(): Boolean {
-    return player.isPlaying
-  }
+  fun pause() {
+    if (_player == null || !player.isPlaying) {
+      return
+    }
 
+    try {
+      player.pause()
+    } catch (e: IllegalStateException) {
+    }
+
+    cancelPlaybackTimer()
+  }
 }
