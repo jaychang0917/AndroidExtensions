@@ -3,9 +3,9 @@ package com.jaychang.extensions.demo.bottomNavView
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import com.jaychang.extensions.core.BottomNavigationViewController
 import com.jaychang.extensions.demo.R
 import com.jaychang.extensions.ui.BadgeConfig
+import com.jaychang.extensions.ui.BottomNavigationViewController
 import kotlinx.android.synthetic.main.activity_bnv.*
 
 class BottomNavigationViewDemoActivity: AppCompatActivity() {

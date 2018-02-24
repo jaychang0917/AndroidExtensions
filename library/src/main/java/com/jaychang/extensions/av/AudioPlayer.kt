@@ -1,4 +1,4 @@
-package com.jaychang.extensions.core
+package com.jaychang.extensions.av
 
 import android.content.Context
 import android.media.AudioManager
@@ -14,7 +14,6 @@ class AudioPlayer(val context: Context) {
   private val player: MediaPlayer
     get() = _player!!
   private val appContext = context.applicationContext
-  private var isStartMode = true
   private lateinit var playbackTimer: CountDownTimer
 
   var onCompletion: (() -> Unit)? = null
@@ -40,7 +39,7 @@ class AudioPlayer(val context: Context) {
     audioManager.abandonAudioFocus(null)
   }
 
-  private fun start(@RawRes rawRes: Int? = null, file: File? = null, uri: Uri? = null) {
+  private fun start(@RawRes rawRes: Int? = null, file: File? = null, uri: Uri? = null, url: String? = null) {
     if (!requestAudioFocus()) {
       return
     }
@@ -55,6 +54,12 @@ class AudioPlayer(val context: Context) {
     }
     uri?.let {
       _player = MediaPlayer.create(appContext, uri)
+    }
+    url?.let {
+      _player = MediaPlayer()
+      player.setAudioStreamType(AudioManager.STREAM_MUSIC)
+      player.setDataSource(url)
+      player.prepareAsync()
     }
 
     player.setOnCompletionListener { _ ->
@@ -72,11 +77,9 @@ class AudioPlayer(val context: Context) {
       true
     }
 
-    isStartMode = true
-
-    start()
-
-    isStartMode = false
+    player.setOnPreparedListener {
+      start()
+    }
   }
 
   private fun start() {
@@ -108,7 +111,7 @@ class AudioPlayer(val context: Context) {
   }
 
   fun play(@RawRes rawRes: Int) {
-    if (isStartMode) {
+    if (_player == null) {
       start(rawRes = rawRes)
     } else {
       start()
@@ -116,7 +119,7 @@ class AudioPlayer(val context: Context) {
   }
 
   fun play(file: File) {
-    if (isStartMode) {
+    if (_player == null) {
       start(file = file)
     } else {
       start()
@@ -124,8 +127,16 @@ class AudioPlayer(val context: Context) {
   }
 
   fun play(uri: Uri) {
-    if (isStartMode) {
+    if (_player == null) {
       start(uri = uri)
+    } else {
+      start()
+    }
+  }
+
+  fun play(url: String) {
+    if (_player == null) {
+      start(url = url)
     } else {
       start()
     }
@@ -145,8 +156,6 @@ class AudioPlayer(val context: Context) {
     player.setOnCompletionListener(null)
     player.setOnErrorListener(null)
     _player = null
-
-    isStartMode = true
 
     cancelPlaybackTimer()
   }

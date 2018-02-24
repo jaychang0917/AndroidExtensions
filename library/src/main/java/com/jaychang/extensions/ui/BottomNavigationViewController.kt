@@ -1,10 +1,8 @@
-package com.jaychang.extensions.core
+package com.jaychang.extensions.ui
 
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import com.jaychang.extensions.ui.BadgeConfig
-import com.jaychang.extensions.ui.BottomNavigationViewEx
 
 class BottomNavigationViewController(private val view: BottomNavigationViewEx,
                                      private val fragmentManager: FragmentManager,

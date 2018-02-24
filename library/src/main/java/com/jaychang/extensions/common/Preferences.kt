@@ -1,4 +1,4 @@
-package com.jaychang.extensions.core
+package com.jaychang.extensions.common
 
 import android.content.Context
 import android.content.SharedPreferences

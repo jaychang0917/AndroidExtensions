@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.jaychang.extensions.ui.RelativeLayoutEx xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="46dp"
+    android:layout_marginEnd="30dp"
+    android:layout_marginStart="30dp"
+    android:layout_marginTop="22dp"
+    android:padding="4dp">
+
 
     <com.jaychang.extensions.ui.ViewEx
-        android:id="@+id/view"
         android:layout_width="100dp"
-        android:layout_centerInParent="true"
-        android:layout_height="100dp"
-        android:background="@color/colorPrimaryDark" />
+        android:id="@+id/view"
+        android:background="@color/colorPrimary"
+        android:layout_height="100dp" />
 
-</com.jaychang.extensions.ui.RelativeLayoutEx>
+</LinearLayout>
