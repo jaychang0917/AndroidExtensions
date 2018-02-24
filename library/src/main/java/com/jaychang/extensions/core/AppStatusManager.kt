@@ -2,7 +2,6 @@ package com.jaychang.extensions.core
 
 import android.app.Activity
 import android.app.Application
-import android.app.KeyguardManager
 import android.content.ComponentCallbacks2
 import android.content.Context
 import android.content.res.Configuration
@@ -25,12 +24,12 @@ object AppStatusManager {
 
   fun register(app: Application, callback: Callback) {
     lifecycleCallbacks = object : Application.ActivityLifecycleCallbacks {
-      override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle) {}
+      override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
 
       override fun onActivityStarted(activity: Activity) {}
 
       override fun onActivityResumed(activity: Activity) {
-        if (canInteractive(activity) && isInBackground) {
+        if (isInteractive(activity) && isInBackground) {
           callback.onAppEnterForeground()
         }
 
@@ -39,7 +38,7 @@ object AppStatusManager {
       }
 
       override fun onActivityPaused(activity: Activity) {
-        if (!canInteractive(activity)) {
+        if (!isInteractive(activity)) {
           isInBackground = true
           callback.onAppEnterBackground()
         }
@@ -51,7 +50,7 @@ object AppStatusManager {
         state = "Stop"
       }
 
-      override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+      override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {}
 
       override fun onActivityDestroyed(activity: Activity) {
         isInBackground = false
@@ -81,14 +80,8 @@ object AppStatusManager {
     componentCallbacks = null
   }
 
-  private fun canInteractive(context: Context): Boolean {
+  private fun isInteractive(context: Context): Boolean {
     val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
-    val isScreenAwake = if (Build.VERSION.SDK_INT < 20) powerManager.isScreenOn else powerManager.isInteractive
-
-    val keyguardManager = context.applicationContext.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-    val isPhoneLocked = keyguardManager.inKeyguardRestrictedInputMode()
-
-    return isScreenAwake && !isPhoneLocked
+    return if (Build.VERSION.SDK_INT < 20) powerManager.isScreenOn else powerManager.isInteractive
   }
-
 }
