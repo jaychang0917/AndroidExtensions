@@ -38,18 +38,18 @@ var View.viewHeight: Int
 
 var View.viewMarginStart: Int
   set(value) {
-    (layoutParams as ViewGroup.MarginLayoutParams).marginStart = value
+    (layoutParams as ViewGroup.MarginLayoutParams).leftMargin = value
   }
   get() {
-    return (layoutParams as ViewGroup.MarginLayoutParams).marginStart
+    return (layoutParams as ViewGroup.MarginLayoutParams).leftMargin
   }
 
 var View.viewMarginEnd: Int
   set(value) {
-    (layoutParams as ViewGroup.MarginLayoutParams).marginEnd = value
+    (layoutParams as ViewGroup.MarginLayoutParams).rightMargin = value
   }
   get() {
-    return (layoutParams as ViewGroup.MarginLayoutParams).marginEnd
+    return (layoutParams as ViewGroup.MarginLayoutParams).rightMargin
   }
 
 var View.viewMarginTop: Int
