@@ -9,38 +9,53 @@ import com.jaychang.extensions.internal.ViewHelper
 open class FrameLayoutEx : FrameLayout {
   private val viewHelper = ViewHelper()
 
-  var radius = 0f
+  var radius
     set(value) {
       viewHelper.radius = value
     }
-  var topLeftRadius = 0f
+    get() = viewHelper.radius
+
+  var topLeftRadius
     set(value) {
       viewHelper.topLeftRadius = value
     }
-  var topRightRadius = 0f
+    get() = viewHelper.topLeftRadius
+
+  var topRightRadius
     set(value) {
       viewHelper.topRightRadius = value
     }
-  var bottomLeftRadius = 0f
+    get() = viewHelper.topRightRadius
+
+  var bottomLeftRadius
     set(value) {
       viewHelper.bottomLeftRadius = value
     }
-  var bottomRightRadius = 0f
+    get() = viewHelper.bottomLeftRadius
+
+  var bottomRightRadius
     set(value) {
       viewHelper.bottomRightRadius = value
     }
-  var borderWidth = 0
+    get() = viewHelper.bottomRightRadius
+
+  var borderWidth
     set(value) {
       viewHelper.borderWidth = value
     }
-  var borderColor = 0
+    get() = viewHelper.borderWidth
+
+  var borderColor
     set(value) {
       viewHelper.borderColor = value
     }
-  var isBadgeVisible = false
+    get() = viewHelper.borderColor
+
+  var isBadgeVisible
     set(value) {
       viewHelper.isBadgeVisible = value
     }
+    get() = viewHelper.isBadgeVisible
 
   constructor(ctx: Context) : this(ctx, null, 0)
   constructor(ctx: Context, attrs: AttributeSet?) : this(ctx, attrs, 0)
