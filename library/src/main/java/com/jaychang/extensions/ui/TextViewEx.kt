@@ -57,10 +57,8 @@ open class TextViewEx : TextView {
     }
     get() = viewHelper.isBadgeVisible
 
-  constructor(ctx: Context) : this(ctx, null)
-  constructor(ctx: Context, attrs: AttributeSet?) : super(ctx, attrs) {
-    setup(ctx, attrs)
-  }
+  constructor(ctx: Context) : this(ctx, null, 0)
+  constructor(ctx: Context, attrs: AttributeSet?) : this(ctx, attrs, 0)
   constructor(ctx: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(ctx, attrs, defStyleAttr) {
     setup(ctx, attrs)
   }
