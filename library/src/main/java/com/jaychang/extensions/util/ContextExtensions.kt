@@ -21,6 +21,8 @@ import java.io.IOException
 import java.util.*
 import kotlin.reflect.KClass
 
+
+
 /**
  * system
  * */
@@ -32,11 +34,20 @@ fun Context.sendSMS(phoneNumber: String, smsContent: String) {
   startActivity(it)
 }
 
-fun Context.makePhoneCall(phoneNumber: String) {
+fun Context.openPhoneCall(phoneNumber: String) {
   val uri = Uri.parse("tel:" + phoneNumber)
   val intent = Intent(Intent.ACTION_VIEW, uri)
   intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
   startActivity(intent)
+}
+
+fun Context.openGoogleMap(lat: Long, lon: Long) {
+  val gmmIntentUri = Uri.parse("geo:$lat,$lon")
+  val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+  mapIntent.setPackage("com.google.android.apps.maps")
+  if (mapIntent.resolveActivity(packageManager) != null) {
+    startActivity(mapIntent)
+  }
 }
 
 fun Context.sendEmail(emails: Array<String>, subject: String? = null, attachments: Array<File>? = null) {
