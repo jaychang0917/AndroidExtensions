@@ -41,7 +41,7 @@ fun Context.openPhoneCall(phoneNumber: String) {
   startActivity(intent)
 }
 
-fun Context.openGoogleMap(lat: Long, lon: Long) {
+fun Context.openGoogleMap(lat: Double, lon: Double) {
   val gmmIntentUri = Uri.parse("geo:$lat,$lon")
   val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
   mapIntent.setPackage("com.google.android.apps.maps")
