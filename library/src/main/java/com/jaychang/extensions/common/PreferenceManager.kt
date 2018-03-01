@@ -1,100 +1,101 @@
 package com.jaychang.extensions.common
 
 import android.content.Context
+import com.jaychang.extensions.internal.ContextProvider
 
 object PreferenceManager {
 
-  fun saveString(context: Context, key: String, value: String) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+  fun saveString(key: String, value: String) {
+    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .edit()
       .putString(key, value)
       .apply()
   }
 
-  fun getString(context: Context, key: String): String {
-    return android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+  fun getString(key: String): String {
+    return android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .getString(key, "")
   }
 
-  fun saveBoolean(context: Context, key: String, value: Boolean) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+  fun saveBoolean(key: String, value: Boolean) {
+    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .edit()
       .putBoolean(key, value)
       .apply()
   }
 
-  fun getBoolean(context: Context, key: String): Boolean {
-    return android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+  fun getBoolean(key: String): Boolean {
+    return android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .getBoolean(key, false)
   }
 
-  fun getBoolean(context: Context, key: String, defaultVal: Boolean): Boolean {
-    return android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+  fun getBoolean(key: String, defaultVal: Boolean): Boolean {
+    return android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .getBoolean(key, defaultVal)
   }
 
-  fun saveInt(context: Context, key: String, value: Int) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+  fun saveInt(key: String, value: Int) {
+    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .edit()
       .putInt(key, value)
       .apply()
   }
 
-  fun getInt(context: Context, key: String): Int {
-    return android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+  fun getInt(key: String): Int {
+    return android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .getInt(key, -1)
   }
 
-  fun saveLong(context: Context, key: String, value: Long) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+  fun saveLong(key: String, value: Long) {
+    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .edit()
       .putLong(key, value)
       .apply()
   }
 
-  fun getLong(context: Context, key: String): Long {
-    return android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+  fun getLong(key: String): Long {
+    return android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .getLong(key, -1L)
   }
 
-  fun saveFloat(context: Context, key: String, value: Float) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+  fun saveFloat(key: String, value: Float) {
+    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .edit()
       .putFloat(key, value)
       .apply()
   }
 
-  fun getFloat(context: Context, key: String): Float {
-    return android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+  fun getFloat(key: String): Float {
+    return android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .getFloat(key, -1f)
   }
 
-  fun saveStringSet(context: Context, key: String, value: Set<String>) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+  fun saveStringSet(key: String, value: Set<String>) {
+    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .edit()
       .putStringSet(key, value)
       .apply()
   }
 
-  fun getStringSet(context: Context, key: String): Set<String> {
-    return android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+  fun getStringSet(key: String): Set<String> {
+    return android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .getStringSet(key, null)
   }
 
-  fun remove(context: Context, key: String) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+  fun remove(key: String) {
+    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .edit()
       .remove(key)
       .apply()
   }
 
-  fun contains(context: Context, key: String) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+  fun contains(key: String) {
+    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .contains(key)
   }
 
   fun clear(context: Context) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext())
+    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
       .edit().clear().apply()
   }
 }
