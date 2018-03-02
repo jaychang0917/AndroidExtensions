@@ -22,7 +22,6 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import com.jaychang.extensions.BuildConfig
 import java.io.File
 import java.io.IOException
 import java.util.*
@@ -96,9 +95,9 @@ private fun internalTakePhotoFromCamera(activity: Activity, requestCode: Int): F
     }
 
     if (photoFile != null) {
-      val uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".provider", photoFile)
+      val uri = FileProvider.getUriForFile(activity, activity.packageName + ".androidextensionsfileprovider", photoFile)
       intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-      intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+      intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
       activity.startActivityForResult(intent, requestCode)
       return photoFile
     }
