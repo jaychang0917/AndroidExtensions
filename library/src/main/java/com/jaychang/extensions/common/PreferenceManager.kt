@@ -1,101 +1,104 @@
 package com.jaychang.extensions.common
 
-import android.content.Context
+import android.content.SharedPreferences
 import com.jaychang.extensions.internal.ContextProvider
 
 object PreferenceManager {
 
-  fun saveString(key: String, value: String) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .edit()
-      .putString(key, value)
-      .apply()
+  fun saveString(key: String, value: String, isAsync: Boolean = true) {
+    perform(isAsync) {
+      getEditor().putString(key, value)
+    }
   }
 
   fun getString(key: String): String {
-    return android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .getString(key, "")
+    return getPreference().getString(key, "")
   }
 
-  fun saveBoolean(key: String, value: Boolean) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .edit()
-      .putBoolean(key, value)
-      .apply()
+  fun saveBoolean(key: String, value: Boolean, isAsync: Boolean = true) {
+    perform(isAsync) {
+      getEditor().putBoolean(key, value)
+    }
   }
 
   fun getBoolean(key: String): Boolean {
-    return android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .getBoolean(key, false)
+    return getPreference().getBoolean(key, false)
   }
 
   fun getBoolean(key: String, defaultVal: Boolean): Boolean {
-    return android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .getBoolean(key, defaultVal)
+    return getPreference().getBoolean(key, defaultVal)
   }
 
-  fun saveInt(key: String, value: Int) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .edit()
-      .putInt(key, value)
-      .apply()
+  fun saveInt(key: String, value: Int, isAsync: Boolean = true) {
+    perform(isAsync) {
+      getEditor().putInt(key, value)
+    }
   }
 
   fun getInt(key: String): Int {
-    return android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .getInt(key, -1)
+    return getPreference().getInt(key, -1)
   }
 
-  fun saveLong(key: String, value: Long) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .edit()
-      .putLong(key, value)
-      .apply()
+  fun saveLong(key: String, value: Long, isAsync: Boolean = true) {
+    perform(isAsync) {
+      getEditor().putLong(key, value)
+    }
   }
 
   fun getLong(key: String): Long {
-    return android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .getLong(key, -1L)
+    return getPreference().getLong(key, -1L)
   }
 
-  fun saveFloat(key: String, value: Float) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .edit()
-      .putFloat(key, value)
-      .apply()
+  fun saveFloat(key: String, value: Float, isAsync: Boolean = true) {
+    perform(isAsync) {
+      getEditor().putFloat(key, value)
+    }
   }
 
   fun getFloat(key: String): Float {
-    return android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .getFloat(key, -1f)
+    return getPreference().getFloat(key, -1f)
   }
 
-  fun saveStringSet(key: String, value: Set<String>) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .edit()
-      .putStringSet(key, value)
-      .apply()
+  fun saveStringSet(key: String, value: Set<String>, isAsync: Boolean = true) {
+    perform(isAsync) {
+      getEditor().putStringSet(key, value)
+    }
   }
 
   fun getStringSet(key: String): Set<String> {
+    return getPreference().getStringSet(key, null)
+  }
+
+  fun remove(key: String, isAsync: Boolean = true) {
+    perform(isAsync) {
+      getEditor().remove(key)
+    }
+  }
+
+  fun contains(key: String): Boolean {
+    return getPreference().contains(key)
+  }
+
+  fun clear(isAsync: Boolean = true) {
+    perform(isAsync) {
+      getEditor().clear()
+    }
+  }
+
+  private fun getPreference(): SharedPreferences {
     return android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .getStringSet(key, null)
   }
 
-  fun remove(key: String) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .edit()
-      .remove(key)
-      .apply()
+  private fun getEditor(): SharedPreferences.Editor {
+    return getPreference().edit()
   }
 
-  fun contains(key: String) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .contains(key)
-  }
-
-  fun clear(context: Context) {
-    android.preference.PreferenceManager.getDefaultSharedPreferences(ContextProvider.context)
-      .edit().clear().apply()
+  private fun perform(isAsync: Boolean, action: () -> SharedPreferences.Editor) {
+    val editor = action()
+    if (isAsync) {
+      editor.apply()
+    } else {
+      editor.commit()
+    }
   }
 }
