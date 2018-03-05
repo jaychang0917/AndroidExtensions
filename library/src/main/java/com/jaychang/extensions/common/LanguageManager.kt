@@ -27,7 +27,7 @@ object LanguageManager {
 
   fun wrap(context: Context): Context {
     var ctx = context
-    val locale = getLocale(context)
+    val locale = getCurrentLocale(context)
     Locale.setDefault(locale)
 
     val res = ctx.resources
@@ -42,7 +42,7 @@ object LanguageManager {
     return ctx
   }
 
-  private fun getLocale(context: Context): Locale {
+  fun getCurrentLocale(context: Context): Locale {
     val lang = getString(context, KEY_CURRENT_LANG)
     val country = getString(context, KEY_CURRENT_COUNTRY)
     return if (!TextUtils.isEmpty(lang)) {
