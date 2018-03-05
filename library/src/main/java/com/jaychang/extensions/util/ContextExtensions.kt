@@ -12,6 +12,7 @@ import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.AsyncTask
 import android.os.Environment
+import android.os.Process
 import android.provider.MediaStore
 import android.support.v4.app.Fragment
 import android.view.View
@@ -207,6 +208,13 @@ val Context.versionCode: Int
     } catch (e: PackageManager.NameNotFoundException) {
       -1
     }
+  }
+
+val Context.processName: String
+  get() {
+    val pid = Process.myPid()
+    val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+    return activityManager.runningAppProcesses.first { it.pid == pid }.processName ?: ""
   }
 
 fun Context.getLaunchIntent(): Intent {
