@@ -18,7 +18,7 @@
 
         <provider
             android:authorities="${applicationId}.androidextensionscontextprovider"
-            android:name=".internal.ContextProvider"
+            android:name=".common.ContextProvider"
             android:exported="false"
             android:enabled="true"/>
     </application>
