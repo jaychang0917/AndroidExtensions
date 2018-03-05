@@ -1,4 +1,4 @@
-package com.jaychang.extensions.common
+package com.jaychang.extensions.internal
 
 import android.annotation.SuppressLint
 import android.content.ContentProvider
@@ -8,7 +8,7 @@ import android.database.Cursor
 import android.net.Uri
 import com.jakewharton.threetenabp.AndroidThreeTen
 
-class ContextProvider : ContentProvider() {
+internal class ContextProvider : ContentProvider() {
 
   companion object {
     @SuppressLint("StaticFieldLeak")
@@ -16,7 +16,7 @@ class ContextProvider : ContentProvider() {
   }
 
   override fun onCreate(): Boolean {
-    Companion.context = context.applicationContext
+    ContextProvider.context = context.applicationContext
     AndroidThreeTen.init(context.applicationContext)
     return true
   }

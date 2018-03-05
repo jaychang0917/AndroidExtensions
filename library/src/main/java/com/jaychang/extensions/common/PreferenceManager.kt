@@ -1,6 +1,7 @@
 package com.jaychang.extensions.common
 
 import android.content.Context
+import com.jaychang.extensions.internal.ContextProvider
 
 object PreferenceManager {
 
