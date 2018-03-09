@@ -15,8 +15,6 @@ import android.os.Environment
 import android.provider.Settings
 import android.support.annotation.RequiresPermission
 import android.telephony.TelephonyManager
-import android.util.DisplayMetrics
-import android.view.WindowManager
 import java.util.*
 
 fun dpToPx(dp: Int): Int {
@@ -69,10 +67,12 @@ val screenInch: Double
     return Math.sqrt((widthInches * widthInches + heightInches * heightInches).toDouble())
   }
 
-/**
- * without height of status bar & bottom virtual navigation bar
- */
 val screenHeight: Int
+  get() {
+    return Resources.getSystem().displayMetrics.heightPixels - statusBarHeight
+  }
+
+val screenHeightWithStatusBar: Int
   get() {
     return Resources.getSystem().displayMetrics.heightPixels
   }
@@ -81,28 +81,6 @@ val screenWidth: Int
   get() {
     return Resources.getSystem().displayMetrics.widthPixels
   }
-
-fun Context.fullScreenHeight(): Int {
-  var height: Int
-  val winMgr = applicationContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-  val display = winMgr.defaultDisplay
-  val dm = DisplayMetrics()
-  if (Build.VERSION.SDK_INT >= 17) {
-    display.getRealMetrics(dm)
-    height = dm.heightPixels
-  } else {
-    try {
-      val method = Class.forName("android.view.Display").getMethod("getRealMetrics", DisplayMetrics::class.java)
-      method.invoke(display, dm)
-      height = dm.heightPixels
-    } catch (e: Exception) {
-      display.getMetrics(dm)
-      height = dm.heightPixels
-    }
-
-  }
-  return height
-}
 
 val statusBarHeight: Int
   get() {
