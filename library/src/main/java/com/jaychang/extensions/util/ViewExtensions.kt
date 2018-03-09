@@ -191,11 +191,11 @@ fun View.isTouchInside(motionEvent: MotionEvent): Boolean {
     && motionY <= viewLoc[1] + height
 }
 
-fun View.onLayout(f: (View) -> Unit) {
+fun View.doOnLayout(f: (View) -> Unit) {
   viewTreeObserver.addOnGlobalLayoutListener(object: ViewTreeObserver.OnGlobalLayoutListener {
     override fun onGlobalLayout() {
       viewTreeObserver.removeOnGlobalLayoutListener(this)
-      f(this@onLayout)
+      f(this@doOnLayout)
     }
   })
 }
