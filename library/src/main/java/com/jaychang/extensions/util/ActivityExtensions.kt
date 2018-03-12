@@ -9,7 +9,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
@@ -117,7 +116,7 @@ fun Fragment.takePhotoFromCamera(requestCode: Int): File? {
 }
 
 @TargetApi(18)
-fun Activity.getPhotoFromAlbum(requestCode: Int, allowMultiple: Boolean = true) {
+fun Activity.pickPhotoFromAlbum(requestCode: Int, allowMultiple: Boolean = true) {
   val intent = Intent(Intent.ACTION_PICK)
   intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, allowMultiple)
   intent.type = "image/*"
@@ -126,7 +125,7 @@ fun Activity.getPhotoFromAlbum(requestCode: Int, allowMultiple: Boolean = true) 
 }
 
 @TargetApi(18)
-fun Intent.getPhoto(context: Context): Uri {
+fun Intent.getPhotoResult(context: Context): File {
   val result: String
   val cursor = context.contentResolver.query(data, null, null, null, null)
   if (cursor == null) {
@@ -137,7 +136,7 @@ fun Intent.getPhoto(context: Context): Uri {
     result = cursor.getString(idx)
     cursor.close()
   }
-  return Uri.fromFile(File(result))
+  return File(result)
 }
 
 fun Activity.setLandscapeMode() {
