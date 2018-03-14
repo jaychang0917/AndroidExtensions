@@ -199,3 +199,17 @@ fun View.doOnLayout(f: (View) -> Unit) {
     }
   })
 }
+
+fun View.doOnPreDraw(action: (view: View) -> Unit) {
+  val vto = viewTreeObserver
+  vto.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+    override fun onPreDraw(): Boolean {
+      action(this@doOnPreDraw)
+      when {
+        vto.isAlive -> vto.removeOnPreDrawListener(this)
+        else -> viewTreeObserver.removeOnPreDrawListener(this)
+      }
+      return true
+    }
+  })
+}
