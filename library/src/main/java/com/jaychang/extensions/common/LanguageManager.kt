@@ -48,7 +48,7 @@ object LanguageManager {
     return if (!TextUtils.isEmpty(lang)) {
       Locale(lang, country)
     } else {
-      Locale.getDefault()
+      Locale(Locale.getDefault().language, country)
     }
   }
 
