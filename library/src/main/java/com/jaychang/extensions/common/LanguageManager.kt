@@ -27,7 +27,7 @@ object LanguageManager {
 
   fun wrap(context: Context): Context {
     var ctx = context
-    val locale = getCurrentLocale(context)
+    val locale = getLocale(context)
     Locale.setDefault(locale)
 
     val res = ctx.resources
@@ -42,7 +42,7 @@ object LanguageManager {
     return ctx
   }
 
-  fun getCurrentLocale(context: Context): Locale {
+  fun getLocale(context: Context): Locale {
     val lang = getString(context, KEY_CURRENT_LANG)
     val country = getString(context, KEY_CURRENT_COUNTRY)
     return if (!TextUtils.isEmpty(lang)) {
@@ -50,6 +50,10 @@ object LanguageManager {
     } else {
       Locale(Locale.getDefault().language, country)
     }
+  }
+
+  fun restore(context: Context) {
+    Locale.setDefault(getLocale(context))
   }
 
   @SuppressLint("ApplySharedPref")
