@@ -11,12 +11,9 @@ import java.util.*
 
 object LanguageManager {
 
-  private val KEY_CURRENT_LANG = LanguageManager::class.java.name + "_CURRENT_LANG"
-  private val KEY_CURRENT_COUNTRY = LanguageManager::class.java.name + "_KEY_CURRENT_COUNTRY"
-
   fun changeLanguage(context: Context, locale: Locale) {
-    saveString(context, KEY_CURRENT_LANG, locale.language)
-    saveString(context, KEY_CURRENT_COUNTRY, locale.country)
+    saveString(context, getKeyCurrentLang(context), locale.language)
+    saveString(context, getKeyCurrentCountry(context), locale.country)
 
     wrap(context)
 
@@ -43,8 +40,8 @@ object LanguageManager {
   }
 
   fun getLocale(context: Context): Locale {
-    val lang = getString(context, KEY_CURRENT_LANG)
-    val country = getString(context, KEY_CURRENT_COUNTRY)
+    val lang = getString(context, getKeyCurrentLang(context))
+    val country = getString(context, getKeyCurrentCountry(context))
     return if (!TextUtils.isEmpty(lang)) {
       Locale(lang, country)
     } else {
@@ -54,6 +51,14 @@ object LanguageManager {
 
   fun restore(context: Context) {
     Locale.setDefault(getLocale(context))
+  }
+
+  private fun getKeyCurrentLang(context: Context): String {
+    return context.packageName + "_CURRENT_LANG"
+  }
+
+  private fun getKeyCurrentCountry(context: Context): String {
+    return context.packageName + "_CURRENT_COUNTRY"
   }
 
   @SuppressLint("ApplySharedPref")
