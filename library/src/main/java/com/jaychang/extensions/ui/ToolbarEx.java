@@ -447,7 +447,7 @@ public class ToolbarEx extends RelativeLayout {
    * title
    */
   public void setTitle(@StringRes int title) {
-    setTitle(getResources().getString(title));
+    setTitle(getContext().getString(title));
   }
 
   public void setTitle(CharSequence title) {
@@ -540,7 +540,7 @@ public class ToolbarEx extends RelativeLayout {
    * left
    */
   public void setLeftText(@StringRes int stringRes) {
-    setLeftText(getResources().getString(stringRes));
+    setLeftText(getContext().getString(stringRes));
   }
 
   public void setLeftText(CharSequence text) {
@@ -612,7 +612,7 @@ public class ToolbarEx extends RelativeLayout {
    * right
    */
   public void setRightText(@StringRes int stringRes) {
-    setRightText(getResources().getString(stringRes));
+    setRightText(getContext().getString(stringRes));
   }
 
   public void setRightText(CharSequence text) {
@@ -818,12 +818,12 @@ public class ToolbarEx extends RelativeLayout {
    * Utils
    * */
   private static int sp2px(Context context, float sp) {
-    float fontScale = context.getApplicationContext().getResources().getDisplayMetrics().scaledDensity;
+    float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
     return (int) (sp * fontScale + 0.5f);
   }
 
   private static int dp2px(Context context, int dp) {
-    float density = context.getApplicationContext().getApplicationContext().getResources().getDisplayMetrics().density;
+    float density = context.getResources().getDisplayMetrics().density;
     return (int) (dp * density + 0.5f);
   }
 
