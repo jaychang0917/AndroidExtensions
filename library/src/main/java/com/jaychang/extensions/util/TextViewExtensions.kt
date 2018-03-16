@@ -11,7 +11,7 @@ val TextView.textBounds: Rect
     return bound
   }
 
-var TextView.leftDrawable: Drawable
+var TextView.leftDrawable: Drawable?
   get() {
     return compoundDrawables[0]
   }
@@ -19,7 +19,7 @@ var TextView.leftDrawable: Drawable
     setCompoundDrawablesWithIntrinsicBounds(value, topDrawable, rightDrawable, bottomDrawable)
   }
 
-var TextView.topDrawable: Drawable
+var TextView.topDrawable: Drawable?
   get() {
     return compoundDrawables[1]
   }
@@ -27,7 +27,7 @@ var TextView.topDrawable: Drawable
     setCompoundDrawablesWithIntrinsicBounds(leftDrawable, value, rightDrawable, bottomDrawable)
   }
 
-var TextView.rightDrawable: Drawable
+var TextView.rightDrawable: Drawable?
   get() {
     return compoundDrawables[2]
   }
@@ -35,7 +35,7 @@ var TextView.rightDrawable: Drawable
     setCompoundDrawablesWithIntrinsicBounds(leftDrawable, topDrawable, value, bottomDrawable)
   }
 
-var TextView.bottomDrawable: Drawable
+var TextView.bottomDrawable: Drawable?
   get() {
     return compoundDrawables[3]
   }
@@ -43,7 +43,7 @@ var TextView.bottomDrawable: Drawable
     setCompoundDrawablesWithIntrinsicBounds(leftDrawable, topDrawable, rightDrawable, value)
   }
 
-var TextView.startDrawable: Drawable
+var TextView.startDrawable: Drawable?
   get() {
     return compoundDrawablesRelative[0]
   }
@@ -51,10 +51,59 @@ var TextView.startDrawable: Drawable
     setCompoundDrawablesRelativeWithIntrinsicBounds(value, topDrawable, endDrawable, bottomDrawable)
   }
 
-var TextView.endDrawable: Drawable
+var TextView.endDrawable: Drawable?
   get() {
     return compoundDrawablesRelative[2]
   }
   set(value) {
     setCompoundDrawablesRelativeWithIntrinsicBounds(startDrawable, topDrawable, endDrawable, bottomDrawable)
+  }
+
+
+var TextView.leftDrawableRes: Int
+  get() {
+    return leftDrawableRes
+  }
+  set(value) {
+    setCompoundDrawablesWithIntrinsicBounds(value, topDrawableRes, rightDrawableRes, bottomDrawableRes)
+  }
+
+var TextView.topDrawableRes: Int
+  get() {
+    return topDrawableRes
+  }
+  set(value) {
+    setCompoundDrawablesWithIntrinsicBounds(leftDrawableRes, value, rightDrawableRes, bottomDrawableRes)
+  }
+
+var TextView.rightDrawableRes: Int
+  get() {
+    return rightDrawableRes
+  }
+  set(value) {
+    setCompoundDrawablesWithIntrinsicBounds(leftDrawableRes, topDrawableRes, value, bottomDrawableRes)
+  }
+
+var TextView.bottomDrawableRes: Int
+  get() {
+    return bottomDrawableRes
+  }
+  set(value) {
+    setCompoundDrawablesWithIntrinsicBounds(leftDrawableRes, topDrawableRes, rightDrawableRes, value)
+  }
+
+var TextView.startDrawableRes: Int
+  get() {
+    return startDrawableRes
+  }
+  set(value) {
+    setCompoundDrawablesRelativeWithIntrinsicBounds(value, topDrawableRes, endDrawableRes, bottomDrawableRes)
+  }
+
+var TextView.endDrawableRes: Int
+  get() {
+    return endDrawableRes
+  }
+  set(value) {
+    setCompoundDrawablesRelativeWithIntrinsicBounds(startDrawableRes, topDrawableRes, endDrawableRes, bottomDrawableRes)
   }
