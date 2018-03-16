@@ -8,7 +8,7 @@ android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
-        minSdkVersion 17
+        minSdkVersion 18
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -23,10 +23,14 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:27.0.2'
+    compile 'com.android.support:appcompat-v7:27.1.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     compile 'com.jakewharton.threetenabp:threetenabp:1.0.5'
     provided 'com.github.bumptech.glide:glide:4.1.1'
-    compile 'com.android.support:design:27.0.2'
+    compile 'com.android.support:design:27.1.0'
     compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
+    compile 'com.writingminds:FFmpegAndroid:0.3.2'
+    compile 'com.github.piasy:rxandroidaudio:1.5.2'
+    compile 'com.github.piasy:AudioProcessor:1.5.2'
+    compile "io.reactivex.rxjava2:rxjava:2.1.10"
 }
