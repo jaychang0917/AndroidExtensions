@@ -42,3 +42,19 @@ var TextView.bottomDrawable: Drawable
   set(value) {
     setCompoundDrawablesWithIntrinsicBounds(leftDrawable, topDrawable, rightDrawable, value)
   }
+
+var TextView.startDrawable: Drawable
+  get() {
+    return compoundDrawablesRelative[0]
+  }
+  set(value) {
+    setCompoundDrawablesRelativeWithIntrinsicBounds(value, topDrawable, endDrawable, bottomDrawable)
+  }
+
+var TextView.endDrawable: Drawable
+  get() {
+    return compoundDrawablesRelative[2]
+  }
+  set(value) {
+    setCompoundDrawablesRelativeWithIntrinsicBounds(startDrawable, topDrawable, endDrawable, bottomDrawable)
+  }
