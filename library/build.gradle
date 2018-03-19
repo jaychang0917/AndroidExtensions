@@ -4,6 +4,10 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 group='com.github.jaychang0917'
 
+repositories {
+    maven { url  "http://dl.bintray.com/piasy/maven" }
+}
+
 android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
