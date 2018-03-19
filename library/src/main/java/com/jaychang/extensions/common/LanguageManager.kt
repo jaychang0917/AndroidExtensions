@@ -39,18 +39,18 @@ object LanguageManager {
     return ctx
   }
 
-  fun getLocale(context: Context): Locale {
+  fun getLocale(context: Context, defaultLocale: Locale? = null): Locale {
     val lang = getString(context, getKeyCurrentLang(context))
     val country = getString(context, getKeyCurrentCountry(context))
     return if (!TextUtils.isEmpty(lang)) {
       Locale(lang, country)
     } else {
-      Locale(Locale.getDefault().language, country)
+      defaultLocale ?: Locale(Locale.getDefault().language, country)
     }
   }
 
-  fun restore(context: Context) {
-    Locale.setDefault(getLocale(context))
+  fun restore(context: Context, defaultLocale: Locale) {
+    Locale.setDefault(getLocale(context, defaultLocale = defaultLocale))
   }
 
   private fun getKeyCurrentLang(context: Context): String {
