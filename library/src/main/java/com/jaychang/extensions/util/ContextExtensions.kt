@@ -130,26 +130,39 @@ fun Fragment.takeVideo(requestCode: Int): Boolean {
   return false
 }
 
-fun Context.openUrl(url: String) {
+fun Context.openUrl(url: String): Boolean {
   val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-  startActivity(intent)
+  intent.resolveActivity(packageManager)?.let {
+    startActivity(intent)
+    return true
+  }
+  return false
 }
 
-fun Context.openFbMessenger(fbUserId: String) {
-  startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("fb://messaging/" + fbUserId)))
+fun Context.openFbMessenger(fbUserId: String): Boolean {
+  val intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb://messaging/" + fbUserId))
+  intent.resolveActivity(packageManager)?.let {
+    startActivity(intent)
+    return true
+  }
+  return false
 }
 
-fun Context.openImage(imagePath: String) {
+fun Context.openImage(imagePath: String): Boolean {
   val intent = Intent(Intent.ACTION_VIEW)
   intent.addCategory(Intent.CATEGORY_DEFAULT)
   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
   intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
   val uri = Uri.fromFile(File(imagePath))
   intent.setDataAndType(uri, "image/*")
-  startActivity(intent)
+  intent.resolveActivity(packageManager)?.let {
+    startActivity(intent)
+    return true
+  }
+  return false
 }
 
-fun Context.openVideo(videoPath: String) {
+fun Context.openVideo(videoPath: String): Boolean {
   val intent = Intent(Intent.ACTION_VIEW)
   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
   intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
@@ -157,7 +170,11 @@ fun Context.openVideo(videoPath: String) {
   intent.putExtra("configchange", 0)
   val uri = Uri.fromFile(File(videoPath))
   intent.setDataAndType(uri, "video/*")
-  startActivity(intent)
+  intent.resolveActivity(packageManager)?.let {
+    startActivity(intent)
+    return true
+  }
+  return false
 }
 
 fun Context.openAppInGooglePlay(packageName: String) {
