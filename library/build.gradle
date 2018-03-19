@@ -4,10 +4,8 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 group='com.github.jaychang0917'
 
-buildscript {
-    repositories {
-        maven { url  "http://dl.bintray.com/piasy/maven" }
-    }
+repositories {
+    maven { url  "http://dl.bintray.com/piasy/maven" }
 }
 
 android {
