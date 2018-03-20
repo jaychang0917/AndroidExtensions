@@ -72,7 +72,7 @@ open class LinearLayoutEx : LinearLayout {
     viewHelper.clipPath(canvas)
     super.draw(canvas)
     viewHelper.drawBorder(canvas)
-    viewHelper.drawBadge(canvas)
+    //viewHelper.drawBadge(canvas)
   }
 
   fun showBadge() {
