@@ -6,19 +6,38 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="46dp"
     android:layout_marginEnd="30dp"
+              android:orientation="vertical"
     android:layout_marginStart="30dp"
     android:layout_marginTop="22dp"
     android:padding="4dp">
 
-
-    <com.jaychang.extensions.ui.ViewEx
-        android:layout_width="100dp"
+    <com.jaychang.extensions.ui.LinearLayoutEx
+        android:layout_width="wrap_content"
         android:id="@+id/view"
         android:background="@color/colorPrimary"
         app:view_topRightRadius="24dp"
         app:view_bottomRightRadius="24dp"
-        app:view_borderColor="@color/colorAccent"
-        app:view_borderWidth="12dp"
-        android:layout_height="100dp" />
+        android:padding="8dp"
+        android:layout_height="35dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:textColor="#fff"
+            android:textSize="14sp"
+            android:singleLine="true"
+            android:text="foo"
+            android:layout_height="wrap_content" />
+
+    </com.jaychang.extensions.ui.LinearLayoutEx>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:onClick="change"
+        android:text="change" />
+
 
 </LinearLayout>

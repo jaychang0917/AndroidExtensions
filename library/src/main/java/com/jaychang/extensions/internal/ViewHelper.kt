@@ -65,8 +65,8 @@ internal class ViewHelper {
       floatArrayOf(topLeftRadius, topLeftRadius, topRightRadius, topRightRadius, bottomRightRadius, bottomRightRadius, bottomLeftRadius, bottomLeftRadius)
     }
 
+    path.reset()
     path.addRoundRect(RectF(0f, 0f, width.toFloat(), height.toFloat()), radii, Path.Direction.CW)
-    view.invalidate()
   }
 
   fun clipPath(canvas: Canvas) {
