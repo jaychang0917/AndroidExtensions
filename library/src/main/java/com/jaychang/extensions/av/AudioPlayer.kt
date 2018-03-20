@@ -8,12 +8,7 @@ import android.os.CountDownTimer
 import android.support.annotation.RawRes
 import java.io.File
 
-class AudioPlayer(val context: Context,
-                  @RawRes rawRes: Int? = null, file: File? = null, uri: Uri? = null, val url: String? = null) {
-
-  init {
-    setSource(rawRes = rawRes, file = file, uri = uri, url = url)
-  }
+class AudioPlayer(val context: Context) {
 
   private var _player: MediaPlayer? = null
   private val player: MediaPlayer
@@ -33,7 +28,7 @@ class AudioPlayer(val context: Context,
   val duration: Int
     get() = player.duration
 
-  private var isPrepared = false
+  private var isStreaming = false
 
   private fun requestAudioFocus(): Boolean {
     val audioManager = appContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
@@ -47,8 +42,6 @@ class AudioPlayer(val context: Context,
   }
 
   fun setSource(@RawRes rawRes: Int? = null, file: File? = null, uri: Uri? = null, url: String? = null) {
-    isPrepared = false
-
     rawRes?.let {
       _player = MediaPlayer.create(appContext, rawRes)
     }
@@ -59,6 +52,7 @@ class AudioPlayer(val context: Context,
       _player = MediaPlayer.create(appContext, uri)
     }
     url?.let {
+      isStreaming = true
       _player = MediaPlayer()
       player.setAudioStreamType(AudioManager.STREAM_MUSIC)
       player.setDataSource(url)
@@ -100,16 +94,14 @@ class AudioPlayer(val context: Context,
   }
 
   fun play() {
-    url?.let {
+    if (isStreaming) {
       player.prepareAsync()
       player.setOnPreparedListener {
         playInternal()
       }
-
-      return
+    } else {
+      playInternal()
     }
-
-    playInternal()
   }
 
   private fun playInternal() {
