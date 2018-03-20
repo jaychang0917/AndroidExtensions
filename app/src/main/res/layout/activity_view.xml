@@ -15,6 +15,10 @@
         android:layout_width="100dp"
         android:id="@+id/view"
         android:background="@color/colorPrimary"
+        app:view_topRightRadius="24dp"
+        app:view_bottomRightRadius="24dp"
+        app:view_borderColor="@color/colorAccent"
+        app:view_borderWidth="12dp"
         android:layout_height="100dp" />
 
 </LinearLayout>

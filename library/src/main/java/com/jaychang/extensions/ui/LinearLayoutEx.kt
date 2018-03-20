@@ -63,8 +63,9 @@ open class LinearLayoutEx : LinearLayout {
     viewHelper.init(this, ctx, attrs)
   }
 
-  override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
-    viewHelper.onSizeChanged(width, height)
+  override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+    super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+    viewHelper.onMeasure(width, height)
   }
 
   override fun draw(canvas: Canvas) {

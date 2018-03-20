@@ -58,7 +58,7 @@ internal class ViewHelper {
     borderPaint.style = Paint.Style.STROKE
   }
 
-  fun onSizeChanged(width: Int, height: Int) {
+  fun onMeasure(width: Int, height: Int) {
     val radii = if (radius != 0f) {
       floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
     } else {
@@ -69,11 +69,13 @@ internal class ViewHelper {
   }
 
   fun clipPath(canvas: Canvas) {
+    canvas.save()
     canvas.clipPath(path)
   }
 
   fun drawBorder(canvas: Canvas) {
     canvas.drawPath(path, borderPaint)
+    canvas.restore()
   }
 
   fun drawBadge(canvas: Canvas) {

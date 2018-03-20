@@ -67,7 +67,7 @@ open class ImageViewEx : ImageView {
   }
 
   override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
-    viewHelper.onSizeChanged(width, height)
+    viewHelper.onMeasure(width, height)
   }
 
   override fun draw(canvas: Canvas) {
