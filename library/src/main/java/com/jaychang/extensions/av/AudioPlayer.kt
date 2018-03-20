@@ -8,7 +8,12 @@ import android.os.CountDownTimer
 import android.support.annotation.RawRes
 import java.io.File
 
-class AudioPlayer(val context: Context) {
+class AudioPlayer(val context: Context,
+                  @RawRes rawRes: Int? = null, file: File? = null, uri: Uri? = null, val url: String? = null) {
+
+  init {
+    setSource(rawRes = rawRes, file = file, uri = uri, url = url)
+  }
 
   private var _player: MediaPlayer? = null
   private val player: MediaPlayer
@@ -28,6 +33,8 @@ class AudioPlayer(val context: Context) {
   val duration: Int
     get() = player.duration
 
+  private var isPrepared = false
+
   private fun requestAudioFocus(): Boolean {
     val audioManager = appContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     val result = audioManager.requestAudioFocus(null, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
@@ -39,12 +46,8 @@ class AudioPlayer(val context: Context) {
     audioManager.abandonAudioFocus(null)
   }
 
-  private fun start(@RawRes rawRes: Int? = null, file: File? = null, uri: Uri? = null, url: String? = null) {
-    if (!requestAudioFocus()) {
-      return
-    }
-
-    stop()
+  fun setSource(@RawRes rawRes: Int? = null, file: File? = null, uri: Uri? = null, url: String? = null) {
+    isPrepared = false
 
     rawRes?.let {
       _player = MediaPlayer.create(appContext, rawRes)
@@ -59,7 +62,6 @@ class AudioPlayer(val context: Context) {
       _player = MediaPlayer()
       player.setAudioStreamType(AudioManager.STREAM_MUSIC)
       player.setDataSource(url)
-      player.prepareAsync()
     }
 
     player.setOnCompletionListener { _ ->
@@ -75,19 +77,6 @@ class AudioPlayer(val context: Context) {
         abandonAudioFocus()
       }
       true
-    }
-
-    player.setOnPreparedListener {
-      start()
-    }
-  }
-
-  private fun start() {
-    try {
-      player.start()
-      startPlaybackTimer()
-    } catch (e: IllegalStateException) {
-      player.release()
     }
   }
 
@@ -110,35 +99,31 @@ class AudioPlayer(val context: Context) {
      playbackTimer.cancel()
   }
 
-  fun play(@RawRes rawRes: Int) {
-    if (_player == null) {
-      start(rawRes = rawRes)
-    } else {
-      start()
+  fun play() {
+    url?.let {
+      player.prepareAsync()
+      player.setOnPreparedListener {
+        playInternal()
+      }
+
+      return
     }
+
+    playInternal()
   }
 
-  fun play(file: File) {
-    if (_player == null) {
-      start(file = file)
-    } else {
-      start()
+  private fun playInternal() {
+    if (!requestAudioFocus()) {
+      return
     }
-  }
 
-  fun play(uri: Uri) {
-    if (_player == null) {
-      start(uri = uri)
-    } else {
-      start()
-    }
-  }
+    stop()
 
-  fun play(url: String) {
-    if (_player == null) {
-      start(url = url)
-    } else {
-      start()
+    try {
+      player.start()
+      startPlaybackTimer()
+    } catch (e: IllegalStateException) {
+      player.release()
     }
   }
 
