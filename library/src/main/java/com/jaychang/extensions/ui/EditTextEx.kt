@@ -73,7 +73,7 @@ open class EditTextEx : EditText {
   }
 
   override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
-    viewHelper.onMeasure(width, height)
+    viewHelper.onSizeChanged(width, height)
   }
 
   override fun draw(canvas: Canvas) {

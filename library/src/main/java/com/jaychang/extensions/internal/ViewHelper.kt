@@ -58,7 +58,7 @@ internal class ViewHelper {
     borderPaint.style = Paint.Style.STROKE
   }
 
-  fun onMeasure(width: Int, height: Int) {
+  fun onSizeChanged(width: Int, height: Int) {
     val radii = if (radius != 0f) {
       floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
     } else {
@@ -66,6 +66,7 @@ internal class ViewHelper {
     }
 
     path.addRoundRect(RectF(0f, 0f, width.toFloat(), height.toFloat()), radii, Path.Direction.CW)
+    view.invalidate()
   }
 
   fun clipPath(canvas: Canvas) {
