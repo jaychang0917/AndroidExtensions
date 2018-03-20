@@ -69,13 +69,11 @@ internal class ViewHelper {
   }
 
   fun clipPath(canvas: Canvas) {
-    canvas.save()
     canvas.clipPath(path)
   }
 
   fun drawBorder(canvas: Canvas) {
     canvas.drawPath(path, borderPaint)
-    canvas.restore()
   }
 
   fun drawBadge(canvas: Canvas) {
