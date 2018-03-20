@@ -71,7 +71,7 @@ open class LinearLayoutEx : LinearLayout {
   override fun draw(canvas: Canvas) {
     viewHelper.clipPath(canvas)
     super.draw(canvas)
-    viewHelper.drawBorder(canvas)
+    //viewHelper.drawBorder(canvas)
     //viewHelper.drawBadge(canvas)
   }
 
