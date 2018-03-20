@@ -41,7 +41,7 @@ class AudioPlayer(val context: Context) {
     audioManager.abandonAudioFocus(null)
   }
 
-  fun setSource(@RawRes rawRes: Int? = null, file: File? = null, uri: Uri? = null, url: String? = null) {
+  private fun setSourceInternal(@RawRes rawRes: Int? = null, file: File? = null, uri: Uri? = null, url: String? = null) {
     isStreaming = false
 
     rawRes?.let {
@@ -74,6 +74,22 @@ class AudioPlayer(val context: Context) {
       }
       true
     }
+  }
+
+  fun setSource(@RawRes rawRes: Int) {
+    setSourceInternal(rawRes = rawRes)
+  }
+
+  fun setSource(file: File) {
+    setSourceInternal(file = file)
+  }
+
+  fun setSource(uri: Uri) {
+    setSourceInternal(uri = uri)
+  }
+
+  fun setSource(url: String) {
+    setSourceInternal(url = url)
   }
 
   private fun startPlaybackTimer() {
