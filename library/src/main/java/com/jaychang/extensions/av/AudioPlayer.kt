@@ -42,6 +42,8 @@ class AudioPlayer(val context: Context) {
   }
 
   fun setSource(@RawRes rawRes: Int? = null, file: File? = null, uri: Uri? = null, url: String? = null) {
+    isStreaming = false
+
     rawRes?.let {
       _player = MediaPlayer.create(appContext, rawRes)
     }
