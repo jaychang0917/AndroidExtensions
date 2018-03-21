@@ -25,7 +25,7 @@ class AudioPlayer(val context: Context) {
   val isPlaying: Boolean
     get() = player.isPlaying
 
-  val duration: Int
+  val durationMillis: Int
     get() = player.duration
 
   private var isStreaming = false
