@@ -13,6 +13,7 @@ class AudioPlayerDemoActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_audio_player)
     audioPlayer = AudioPlayer(this)
+    audioPlayer.setSource(url = "https://www.buddigo.com/uploadedvoice/618/618.mp3")
     audioPlayer.onPlaybackPercentage = {
       println("time: $it%")
     }
@@ -20,7 +21,7 @@ class AudioPlayerDemoActivity : AppCompatActivity() {
 
   fun play(view: View) {
     println("play")
-//    audioPlayer.play(R.raw.a)
+    audioPlayer.play()
   }
 
   fun pause(view: View) {

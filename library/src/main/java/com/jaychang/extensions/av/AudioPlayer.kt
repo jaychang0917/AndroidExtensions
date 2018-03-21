@@ -29,6 +29,8 @@ class AudioPlayer(val context: Context) {
     get() = player.duration
 
   private var isStreaming = false
+  private var isPlayRequested = false
+  private var isPrepared = false
 
   private fun requestAudioFocus(): Boolean {
     val audioManager = appContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
@@ -42,6 +44,8 @@ class AudioPlayer(val context: Context) {
   }
 
   private fun setSourceInternal(@RawRes rawRes: Int? = null, file: File? = null, uri: Uri? = null, url: String? = null) {
+    stop()
+
     isStreaming = false
 
     rawRes?.let {
@@ -58,6 +62,13 @@ class AudioPlayer(val context: Context) {
       _player = MediaPlayer()
       player.setAudioStreamType(AudioManager.STREAM_MUSIC)
       player.setDataSource(url)
+      player.prepareAsync()
+      player.setOnPreparedListener {
+        isPrepared = true
+        if (isPlayRequested) {
+          playInternal()
+        }
+      }
     }
 
     player.setOnCompletionListener { _ ->
@@ -112,22 +123,23 @@ class AudioPlayer(val context: Context) {
   }
 
   fun play() {
-    if (isStreaming) {
-      player.prepareAsync()
-      player.setOnPreparedListener {
-        playInternal()
-      }
-    } else {
+    if (isPrepared) {
       playInternal()
+    } else {
+      isPlayRequested = true
     }
   }
 
   private fun playInternal() {
+    if (isPlaying) {
+      return
+    }
+    
     if (!requestAudioFocus()) {
       return
     }
 
-    stop()
+    isPlayRequested = false
 
     try {
       player.start()
@@ -151,6 +163,8 @@ class AudioPlayer(val context: Context) {
     player.setOnCompletionListener(null)
     player.setOnErrorListener(null)
     _player = null
+    isPrepared = false
+    isPlayRequested = false
 
     cancelPlaybackTimer()
   }
