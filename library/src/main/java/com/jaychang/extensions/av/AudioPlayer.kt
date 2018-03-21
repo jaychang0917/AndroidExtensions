@@ -62,6 +62,7 @@ class AudioPlayer(val context: Context) {
       player.prepareAsync()
       player.setOnPreparedListener {
         isPrepared = true
+        onPrepared?.invoke()
         if (isPlayRequested) {
           playInternal()
         }
