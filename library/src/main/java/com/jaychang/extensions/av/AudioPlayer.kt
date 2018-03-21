@@ -20,6 +20,7 @@ class AudioPlayer(val context: Context) {
   var onError: (() -> Unit)? = null
   var onPlaybackTimeMillis: ((Int) -> Unit)? = null
   var onPlaybackPercentage: ((Float) -> Unit)? = null
+  var onPrepared: (() -> Unit)? = null
   var resumeMusic: Boolean = true
 
   val isPlaying: Boolean
@@ -28,7 +29,6 @@ class AudioPlayer(val context: Context) {
   val durationMillis: Int
     get() = player.duration
 
-  private var isStreaming = false
   private var isPlayRequested = false
   private var isPrepared = false
 
@@ -46,8 +46,6 @@ class AudioPlayer(val context: Context) {
   private fun setSourceInternal(@RawRes rawRes: Int? = null, file: File? = null, uri: Uri? = null, url: String? = null) {
     stop()
 
-    isStreaming = false
-
     rawRes?.let {
       _player = MediaPlayer.create(appContext, rawRes)
     }
@@ -58,7 +56,6 @@ class AudioPlayer(val context: Context) {
       _player = MediaPlayer.create(appContext, uri)
     }
     url?.let {
-      isStreaming = true
       _player = MediaPlayer()
       player.setAudioStreamType(AudioManager.STREAM_MUSIC)
       player.setDataSource(url)
