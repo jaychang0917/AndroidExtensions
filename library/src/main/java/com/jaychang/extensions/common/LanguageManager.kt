@@ -11,7 +11,7 @@ import java.util.*
 
 object LanguageManager {
 
-  private lateinit var defaultLocale: Locale
+  private var defaultLocale: Locale? = null
 
   fun changeLanguage(context: Context, locale: Locale) {
     saveString(context, getKeyCurrentLang(context), locale.language)
@@ -47,7 +47,7 @@ object LanguageManager {
     return if (!TextUtils.isEmpty(lang)) {
       Locale(lang, country)
     } else {
-      defaultLocale
+      defaultLocale ?: Locale(Locale.getDefault().language, Locale.getDefault().country)
     }
   }
 
