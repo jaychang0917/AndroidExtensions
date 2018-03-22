@@ -9,19 +9,26 @@ import android.support.annotation.RawRes
 import java.io.File
 
 class AudioPlayer(val context: Context) {
+  companion object {
+    private const val PLAYBACK_INTERVAL = 16
+  }
 
   private var _player: MediaPlayer? = null
   private val player: MediaPlayer
     get() = _player!!
   private val appContext = context.applicationContext
   private lateinit var playbackTimer: CountDownTimer
+  private var playOpRequest:PlayOpRequest? = null
+  private var seekOpRequest: SeekOpRequest? = null
+  private var isPrepared = false
 
-  var onCompletion: (() -> Unit)? = null
-  var onError: (() -> Unit)? = null
-  var onPlaybackTimeMillis: ((Int) -> Unit)? = null
-  var onPlaybackPercentage: ((Float) -> Unit)? = null
-  var onPrepared: (() -> Unit)? = null
-  var resumeMusic: Boolean = true
+  private var onCompleted: (() -> Unit)? = null
+  private var onError: (() -> Unit)? = null
+  private var playbackTimeInterval = PLAYBACK_INTERVAL
+  private var onPlaybackTimeMillis: ((Float) -> Unit)? = null
+  private var onPlaybackPercentage: ((Float) -> Unit)? = null
+  private var onPrepared: (() -> Unit)? = null
+  var shouldResumeMusic: Boolean = true
 
   val isPlaying: Boolean
     get() = player.isPlaying
@@ -29,8 +36,8 @@ class AudioPlayer(val context: Context) {
   val durationMillis: Int
     get() = player.duration
 
-  private var isPlayRequested = false
-  private var isPrepared = false
+  val currentPosition: Int
+    get() = player.currentPosition
 
   private fun requestAudioFocus(): Boolean {
     val audioManager = appContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
@@ -60,25 +67,31 @@ class AudioPlayer(val context: Context) {
       player.setAudioStreamType(AudioManager.STREAM_MUSIC)
       player.setDataSource(url)
       player.prepareAsync()
-      player.setOnPreparedListener {
-        isPrepared = true
-        onPrepared?.invoke()
-        if (isPlayRequested) {
-          playInternal()
-        }
+    }
+
+    player.setOnPreparedListener {
+      isPrepared = true
+      onPrepared?.invoke()
+      playOpRequest?.let {
+        playInternal()
+        playOpRequest = null
+      }
+      seekOpRequest?.let {
+        seekTo(it.millis)
+        seekOpRequest = null
       }
     }
 
     player.setOnCompletionListener { _ ->
-      onCompletion?.invoke()
-      if (resumeMusic) {
+      onCompleted?.invoke()
+      if (shouldResumeMusic) {
         abandonAudioFocus()
       }
     }
 
     player.setOnErrorListener { _, _, _ ->
       onError?.invoke()
-      if (resumeMusic) {
+      if (shouldResumeMusic) {
         abandonAudioFocus()
       }
       true
@@ -102,14 +115,14 @@ class AudioPlayer(val context: Context) {
   }
 
   private fun startPlaybackTimer() {
-    playbackTimer = object: CountDownTimer((player.duration - player.currentPosition).toLong(), 1000L) {
+    playbackTimer = object: CountDownTimer((player.duration - player.currentPosition).toLong(), playbackTimeInterval.toLong()) {
       override fun onFinish() {
-        onPlaybackTimeMillis?.invoke(player.duration)
+        onPlaybackTimeMillis?.invoke(player.duration.toFloat())
         onPlaybackPercentage?.invoke(100f)
       }
 
       override fun onTick(millisUntilFinished: Long) {
-        onPlaybackTimeMillis?.invoke(player.currentPosition)
+        onPlaybackTimeMillis?.invoke(player.currentPosition.toFloat())
         onPlaybackPercentage?.invoke(player.currentPosition.toFloat() / player.duration.toFloat() * 100)
       }
     }
@@ -124,7 +137,7 @@ class AudioPlayer(val context: Context) {
     if (isPrepared) {
       playInternal()
     } else {
-      isPlayRequested = true
+      playOpRequest = PlayOpRequest()
     }
   }
 
@@ -136,8 +149,6 @@ class AudioPlayer(val context: Context) {
     if (!requestAudioFocus()) {
       return
     }
-
-    isPlayRequested = false
 
     try {
       player.start()
@@ -162,7 +173,6 @@ class AudioPlayer(val context: Context) {
     player.setOnErrorListener(null)
     _player = null
     isPrepared = false
-    isPlayRequested = false
 
     cancelPlaybackTimer()
   }
@@ -179,4 +189,36 @@ class AudioPlayer(val context: Context) {
 
     cancelPlaybackTimer()
   }
+
+  fun seekTo(millis: Int) {
+    seekOpRequest = SeekOpRequest(millis)
+    player.seekTo(millis)
+  }
+
+  fun setOnCompletedListener(listener: (() -> Unit)) {
+    onCompleted = listener
+  }
+
+  fun setOnErrorListener(listener: (() -> Unit)) {
+    onError = listener
+  }
+
+  fun setOnPlaybackListener(interval: Int = PLAYBACK_INTERVAL, mode: OnPlayBackMode = OnPlayBackMode.TIME, listener: ((Float) -> Unit)) {
+    playbackTimeInterval = interval
+    if (mode == OnPlayBackMode.TIME) {
+      onPlaybackTimeMillis = listener
+    } else {
+      onPlaybackPercentage = listener
+    }
+  }
+
+  fun setOnPreparedListener(listener: (() -> Unit)) {
+    onPrepared = listener
+  }
+
+  class SeekOpRequest(val millis: Int)
+
+  class PlayOpRequest
+
+  enum class OnPlayBackMode { TIME, PERCENTAGE }
 }
