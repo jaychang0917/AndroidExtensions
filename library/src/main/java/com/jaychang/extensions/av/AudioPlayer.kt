@@ -25,8 +25,8 @@ class AudioPlayer(val context: Context) {
   private var onCompleted: (() -> Unit)? = null
   private var onError: (() -> Unit)? = null
   private var playbackTimeInterval = PLAYBACK_INTERVAL
-  private var onPlaybackTimeMillis: ((Float) -> Unit)? = null
-  private var onPlaybackPercentage: ((Float) -> Unit)? = null
+  private var onPlaybackTimeMillis: ((Int) -> Unit)? = null
+  private var onPlaybackPercentage: ((Int) -> Unit)? = null
   private var onPrepared: (() -> Unit)? = null
   var shouldResumeMusic: Boolean = true
 
@@ -117,13 +117,13 @@ class AudioPlayer(val context: Context) {
   private fun startPlaybackTimer() {
     playbackTimer = object: CountDownTimer((player.duration - player.currentPosition).toLong(), playbackTimeInterval.toLong()) {
       override fun onFinish() {
-        onPlaybackTimeMillis?.invoke(player.duration.toFloat())
-        onPlaybackPercentage?.invoke(100f)
+        onPlaybackTimeMillis?.invoke(player.duration)
+        onPlaybackPercentage?.invoke(100)
       }
 
       override fun onTick(millisUntilFinished: Long) {
-        onPlaybackTimeMillis?.invoke(player.currentPosition.toFloat())
-        onPlaybackPercentage?.invoke(player.currentPosition.toFloat() / player.duration.toFloat() * 100)
+        onPlaybackTimeMillis?.invoke(player.currentPosition)
+        onPlaybackPercentage?.invoke((player.currentPosition.toFloat() / player.duration.toFloat() * 100).toInt())
       }
     }
     playbackTimer.start()
@@ -203,7 +203,7 @@ class AudioPlayer(val context: Context) {
     onError = listener
   }
 
-  fun setOnPlaybackListener(interval: Int = PLAYBACK_INTERVAL, mode: OnPlayBackMode = OnPlayBackMode.TIME, listener: ((Float) -> Unit)) {
+  fun setOnPlaybackListener(interval: Int = PLAYBACK_INTERVAL, mode: OnPlayBackMode = OnPlayBackMode.TIME, listener: ((Int) -> Unit)) {
     playbackTimeInterval = interval
     if (mode == OnPlayBackMode.TIME) {
       onPlaybackTimeMillis = listener
