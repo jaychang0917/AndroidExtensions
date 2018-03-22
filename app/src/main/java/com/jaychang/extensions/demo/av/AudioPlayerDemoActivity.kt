@@ -14,7 +14,7 @@ class AudioPlayerDemoActivity : AppCompatActivity() {
     setContentView(R.layout.activity_audio_player)
     audioPlayer = AudioPlayer(this)
     audioPlayer.setSource(url = "https://www.buddigo.com/uploadedvoice/618/618.mp3")
-    audioPlayer.setOnPlaybackListener {
+    audioPlayer.setOnPlaybackMillisTimeListener {
       println("time: $it%")
     }
     audioPlayer.seekTo(5000)
