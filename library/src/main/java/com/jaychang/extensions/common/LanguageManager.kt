@@ -11,6 +11,8 @@ import java.util.*
 
 object LanguageManager {
 
+  private lateinit var defaultLocale: Locale
+
   fun changeLanguage(context: Context, locale: Locale) {
     saveString(context, getKeyCurrentLang(context), locale.language)
     saveString(context, getKeyCurrentCountry(context), locale.country)
@@ -39,18 +41,19 @@ object LanguageManager {
     return ctx
   }
 
-  fun getLocale(context: Context, defaultLocale: Locale? = null): Locale {
+  fun getLocale(context: Context): Locale {
     val lang = getString(context, getKeyCurrentLang(context))
     val country = getString(context, getKeyCurrentCountry(context))
     return if (!TextUtils.isEmpty(lang)) {
       Locale(lang, country)
     } else {
-      defaultLocale ?: Locale(Locale.getDefault().language, country)
+      defaultLocale
     }
   }
 
   fun restore(context: Context, defaultLocale: Locale) {
-    Locale.setDefault(getLocale(context, defaultLocale = defaultLocale))
+    this.defaultLocale = defaultLocale
+    Locale.setDefault(getLocale(context))
   }
 
   private fun getKeyCurrentLang(context: Context): String {
