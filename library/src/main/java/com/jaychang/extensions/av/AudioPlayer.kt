@@ -159,7 +159,7 @@ class AudioPlayer(val context: Context) {
       }
 
       override fun onTick(millisUntilFinished: Long) {
-        onPlaybackPercentageListener?.invoke((player.currentPosition.toFloat() / player.duration.toFloat() * 100).toInt())
+        onPlaybackPercentageListener?.invoke((player.currentPosition.toDouble() / player.duration.toDouble() * 100).toInt())
       }
     }
     playbackPercentModeTimer.start()
