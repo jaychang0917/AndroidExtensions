@@ -22,14 +22,14 @@ android {
 }
 
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
-    api 'com.android.support:appcompat-v7:27.1.0'
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api 'com.jakewharton.threetenabp:threetenabp:1.0.5'
-    api 'com.android.support:design:27.1.0'
-    api 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:27.1.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compile 'com.jakewharton.threetenabp:threetenabp:1.0.5'
+    compile 'com.android.support:design:27.1.0'
+    compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
     implementation 'com.writingminds:FFmpegAndroid:0.3.2'
     implementation 'com.github.piasy:rxandroidaudio:1.5.2'
     implementation 'com.github.piasy:AudioProcessor:1.5.2'
-    api "io.reactivex.rxjava2:rxjava:2.1.10"
+    compile "io.reactivex.rxjava2:rxjava:2.1.10"
 }
