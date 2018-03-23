@@ -32,12 +32,14 @@ open class BottomNavigationViewEx : com.ittianyu.bottomnavigationviewex.BottomNa
       enableItemShiftingMode(value)
       enableAnimation(value)
       enableShiftingMode(value)
+      field = value
     }
 
   var isIconOnly = false
     set(value) {
       if (value) {
         setTextVisibility(!value)
+        field = value
       }
     }
 
@@ -45,6 +47,7 @@ open class BottomNavigationViewEx : com.ittianyu.bottomnavigationviewex.BottomNa
     set(value) {
       if (value) {
         setIconVisibility(!value)
+        field = value
       }
     }
 
@@ -52,6 +55,7 @@ open class BottomNavigationViewEx : com.ittianyu.bottomnavigationviewex.BottomNa
     set(value) {
       if (value != 0) {
         setTextSize(value.toFloat())
+        field = value
       }
     }
 
