@@ -85,7 +85,6 @@ class AudioPlayer(val context: Context) {
     }
 
     player.setOnCompletionListener { _ ->
-      player.seekTo(0)
       cancelPlaybackTimer()
       onCompletedListener?.invoke()
       if (shouldResumeMusic) {
