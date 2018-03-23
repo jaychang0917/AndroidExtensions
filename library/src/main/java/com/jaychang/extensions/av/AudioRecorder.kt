@@ -13,10 +13,10 @@ object AudioRecorder {
     }
   }
 
-  fun setSource(file: File,
-                source: Int = MediaRecorder.AudioSource.MIC,
-                format: Int = MediaRecorder.OutputFormat.MPEG_4,
-                encoder: Int = MediaRecorder.AudioEncoder.AAC
+  fun prepare(file: File,
+              source: Int = MediaRecorder.AudioSource.MIC,
+              format: Int = MediaRecorder.OutputFormat.MPEG_4,
+              encoder: Int = MediaRecorder.AudioEncoder.AAC
   ) {
     recorder.prepareRecord(source, format, encoder, file)
   }

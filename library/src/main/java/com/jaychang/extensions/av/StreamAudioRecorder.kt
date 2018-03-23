@@ -23,9 +23,9 @@ object StreamAudioRecorder {
   private val isRecording: AtomicBoolean = AtomicBoolean(false)
   private lateinit var executorService: ExecutorService
 
-  var onDataReady: ((data: ByteArray, size: Int) -> Unit)? = null
-  var onAmplitudeChanged: ((amplitude: Int) -> Unit)? = null
-  var onError: (() -> Unit)? = null
+  private var onDataReadyListener: ((data: ByteArray, size: Int) -> Unit)? = null
+  private var onAmplitudeChangeListener: ((amplitude: Int) -> Unit)? = null
+  private var onErrorListener: (() -> Unit)? = null
 
   @Synchronized
   fun start(): Boolean {
@@ -42,6 +42,18 @@ object StreamAudioRecorder {
   fun stop() {
     isRecording.compareAndSet(true, false)
     executorService.shutdown()
+  }
+
+  fun setOnDataReadyListener(listener: (data: ByteArray, size: Int) -> Unit) {
+    onDataReadyListener = listener
+  }
+
+  fun setOnAmplitudeChangeListener(listener: (amplitude: Int) -> Unit) {
+    onAmplitudeChangeListener = listener
+  }
+
+  fun setOnErrorListener(listener: () -> Unit) {
+    onErrorListener = listener
   }
 
   private class AudioRecordRunnable : Runnable {
@@ -71,15 +83,15 @@ object StreamAudioRecorder {
         audioRecord.startRecording()
       } catch (e: IllegalStateException) {
         Log.w(TAG, "startRecording fail: " + e.message)
-        onError?.invoke()
+        onErrorListener?.invoke()
         return
       }
 
       while (isRecording.get()) {
         val readShorts = audioRecord.read(shortBuffer, 0, SHORT_BUFFER_SIZE)
         if (readShorts > 0) {
-          onDataReady?.invoke(short2byte(shortBuffer, readShorts, byteBuffer), readShorts * 2)
-          onAmplitudeChanged?.invoke(getAmplitude(readShorts, shortBuffer))
+          onDataReadyListener?.invoke(short2byte(shortBuffer, readShorts, byteBuffer), readShorts * 2)
+          onAmplitudeChangeListener?.invoke(getAmplitude(readShorts, shortBuffer))
         } else {
           onError(readShorts)
           break
@@ -118,10 +130,10 @@ object StreamAudioRecorder {
     private fun onError(errorCode: Int) {
       if (errorCode == AudioRecord.ERROR_INVALID_OPERATION) {
         Log.e(TAG, "audio record fail: ERROR_INVALID_OPERATION")
-        onError?.invoke()
+        onErrorListener?.invoke()
       } else if (errorCode == AudioRecord.ERROR_BAD_VALUE) {
         Log.e(TAG, "audio record fail: ERROR_BAD_VALUE")
-        onError?.invoke()
+        onErrorListener?.invoke()
       }
     }
   }
