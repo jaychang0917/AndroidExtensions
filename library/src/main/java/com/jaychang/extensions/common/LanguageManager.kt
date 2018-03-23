@@ -45,9 +45,19 @@ object LanguageManager {
     val lang = getString(context, getKeyCurrentLang(context))
     val country = getString(context, getKeyCurrentCountry(context))
     return if (!TextUtils.isEmpty(lang)) {
-      Locale(lang, country)
+      val locale = Locale(lang, country)
+      if (locale.language == Locale.ENGLISH.language) {
+        Locale.ENGLISH
+      } else {
+        locale
+      }
     } else {
-      defaultLocale ?: Locale(Locale.getDefault().language, Locale.getDefault().country)
+      val locale = if (Locale.getDefault().language == Locale.ENGLISH.language) {
+        Locale.ENGLISH
+      } else {
+        Locale(Locale.getDefault().language, Locale.getDefault().country)
+      }
+      defaultLocale ?: locale
     }
   }
 
