@@ -22,6 +22,7 @@ class AudioPlayer(val context: Context) {
   private var playOpRequest:PlayOpRequest? = null
   private var seekOpRequest: SeekOpRequest? = null
   private var isPrepared = false
+  private var isFinished = false
 
   private var onCompletedListener: (() -> Unit)? = null
   private var onErrorListener: (() -> Unit)? = null
@@ -85,6 +86,7 @@ class AudioPlayer(val context: Context) {
     }
 
     player.setOnCompletionListener { _ ->
+      isFinished = true
       cancelPlaybackTimer()
       onCompletedListener?.invoke()
       if (shouldResumeMusic) {
@@ -186,6 +188,11 @@ class AudioPlayer(val context: Context) {
       return
     }
 
+    if (isFinished) {
+      player.seekTo(0)
+      isFinished = false
+    }
+
     try {
       player.start()
       startPlaybackTimer()
@@ -209,6 +216,7 @@ class AudioPlayer(val context: Context) {
     player.setOnErrorListener(null)
     _player = null
     isPrepared = false
+    isFinished = false
 
     onPlaybackTimeListener?.let {
       cancelPlaybackTimeModeTimer()
