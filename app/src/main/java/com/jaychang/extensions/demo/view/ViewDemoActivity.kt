@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.jaychang.extensions.demo.R
-import kotlinx.android.synthetic.main.activity_view.*
-import java.util.*
 
 class ViewDemoActivity: AppCompatActivity() {
 
@@ -15,6 +13,5 @@ class ViewDemoActivity: AppCompatActivity() {
   }
 
   fun change(view: View) {
-    textView.text = UUID.randomUUID().toString()
   }
 }
