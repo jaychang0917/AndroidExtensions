@@ -117,7 +117,7 @@ public class ToolbarEx extends RelativeLayout {
   }
 
   private void inflateViews(Context context) {
-    View view = LayoutInflater.from(context).inflate(R.layout.toolbar_toolbar, this);
+    View view = LayoutInflater.from(context).inflate(R.layout.ae_toolbar, this);
     leftIconViewStub = view.findViewById(R.id.leftIconStub);
     leftTextViewStub = view.findViewById(R.id.leftTextStub);
     titleTextViewStub = view.findViewById(R.id.titleStub);
