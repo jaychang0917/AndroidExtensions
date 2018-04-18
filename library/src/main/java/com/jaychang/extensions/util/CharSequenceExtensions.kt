@@ -2,6 +2,7 @@ package com.jaychang.extensions.util
 
 import android.graphics.Color
 import android.graphics.Typeface
+import android.support.annotation.ColorInt
 import android.text.SpannableString
 import android.text.TextUtils
 import android.text.method.LinkMovementMethod
@@ -40,13 +41,13 @@ fun CharSequence.underline() : SpannableString {
   return spannableString
 }
 
-fun CharSequence.backgroundColor(color: Int) : SpannableString {
+fun CharSequence.backgroundColor(@ColorInt color: Int) : SpannableString {
   val spannableString = SpannableString(this)
   spannableString.setSpan(BackgroundColorSpan(color), 0, length, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
   return spannableString
 }
 
-fun CharSequence.color(color: Int) : SpannableString {
+fun CharSequence.color(@ColorInt color: Int) : SpannableString {
   val spannableString = SpannableString(this)
   spannableString.setSpan(ForegroundColorSpan(color), 0, length, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE)
   return spannableString
