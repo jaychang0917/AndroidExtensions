@@ -32,6 +32,6 @@ object AudioRecorder {
   }
 
   fun stop() {
-    recorder.startRecord()
+    recorder.stopRecord()
   }
 }
