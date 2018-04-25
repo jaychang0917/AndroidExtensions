@@ -34,7 +34,6 @@ dependencies {
     compile 'com.android.support:design:27.1.0'
     compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
     implementation 'com.writingminds:FFmpegAndroid:0.3.2'
-    implementation 'com.github.piasy:rxandroidaudio:1.5.2'
     implementation 'com.github.piasy:AudioProcessor:1.5.2'
     compile "io.reactivex.rxjava2:rxjava:2.1.10"
     compile 'com.romandanylyk:pageindicatorview:1.0.0'

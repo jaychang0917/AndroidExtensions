@@ -1,11 +1,10 @@
 package com.jaychang.extensions.av
 
 import android.media.MediaRecorder
-import com.github.piasy.rxandroidaudio.AudioRecorder
 import java.io.File
 
 object AudioRecorder {
-  private val recorder: AudioRecorder = AudioRecorder.getInstance()
+  private val recorder: AudioRecorderInternal = AudioRecorderInternal.getInstance()
 
   fun setOnErrorListener(listener: (Int) -> Unit) {
     recorder.setOnErrorListener {
@@ -13,12 +12,19 @@ object AudioRecorder {
     }
   }
 
+  fun setOnMaxDurationReachListener(listener: () -> Unit) {
+    recorder.setmOnMaxDurationReachListener {
+      listener.invoke()
+    }
+  }
+
   fun prepare(file: File,
               source: Int = MediaRecorder.AudioSource.MIC,
               format: Int = MediaRecorder.OutputFormat.MPEG_4,
-              encoder: Int = MediaRecorder.AudioEncoder.AAC
+              encoder: Int = MediaRecorder.AudioEncoder.AAC,
+              maxDurationMs: Int = Int.MAX_VALUE
   ) {
-    recorder.prepareRecord(source, format, encoder, file)
+    recorder.prepareRecord(source, format, encoder, maxDurationMs, file)
   }
 
   fun start() {
