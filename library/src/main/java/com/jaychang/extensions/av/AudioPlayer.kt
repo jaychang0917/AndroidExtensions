@@ -25,7 +25,7 @@ class AudioPlayer(val context: Context) {
   private var isFinished = false
 
   private var onCompletedListener: (() -> Unit)? = null
-  private var onErrorListener: (() -> Unit)? = null
+  private var onErrorListener: ((what: Int, extra: Int) -> Unit)? = null
   private var playbackTimeInterval = PLAYBACK_INTERVAL
   private var playbackPercentInterval = PLAYBACK_INTERVAL
   private var onPlaybackTimeListener: ((Int) -> Unit)? = null
@@ -94,8 +94,8 @@ class AudioPlayer(val context: Context) {
       }
     }
 
-    player.setOnErrorListener { _, _, _ ->
-      onErrorListener?.invoke()
+    player.setOnErrorListener { _, what, extra ->
+      onErrorListener?.invoke(what, extra)
       if (shouldResumeMusic) {
         abandonAudioFocus()
       }
@@ -248,7 +248,7 @@ class AudioPlayer(val context: Context) {
     onCompletedListener = listener
   }
 
-  fun setOnErrorListener(listener: (() -> Unit)) {
+  fun setOnErrorListener(listener: ((what: Int, extra: Int) -> Unit)) {
     onErrorListener = listener
   }
 
