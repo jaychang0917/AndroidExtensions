@@ -1,5 +1,7 @@
 package com.jaychang.extensions.util
 
+import java.text.DecimalFormat
+
 fun Int.digits(): List<Int> {
   val result = mutableListOf<Int>()
   return toString().mapTo(result, { it.toString().toInt() })
@@ -22,7 +24,7 @@ fun Int.isEven(): Boolean = this % 2 == 0
 
 fun Int.isOdd(): Boolean = this % 2 != 0
 
-fun Int.format(trimTrailingZero: Boolean = true): String {
+fun Int.toKMGTPE(trimTrailingZero: Boolean = true): String {
   if (this < 1000) {
     return toString()
   }
@@ -52,4 +54,9 @@ fun Int.toRomanNumeral(): String {
     }
   }
   return romanValue
+}
+
+fun Int.toDecimalNumeral(): String {
+  val formatter = DecimalFormat("#,###,###")
+  return formatter.format(this)
 }
