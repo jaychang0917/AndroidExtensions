@@ -262,9 +262,9 @@ var Activity.isLightStatusBar: Boolean
     }
 
     if (isLight) {
-      window.decorView.systemUiVisibility += View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+      window.decorView.systemUiVisibility = window.decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     } else {
-      window.decorView.systemUiVisibility -= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+      window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
   }
 
