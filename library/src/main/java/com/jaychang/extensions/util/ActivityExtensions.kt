@@ -248,6 +248,26 @@ var Activity.statusBarColor: Int
     window.statusBarColor = color
   }
 
+var Activity.isLightStatusBar: Boolean
+  get() {
+    if (Build.VERSION.SDK_INT < 23) {
+      throw RuntimeException("API level must >= 23")
+    } else {
+      return window.decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR != 0
+    }
+  }
+  set(isLight) {
+    if (Build.VERSION.SDK_INT < 23) {
+      return
+    }
+
+    if (isLight) {
+      window.decorView.systemUiVisibility += View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+    } else {
+      window.decorView.systemUiVisibility -= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+    }
+  }
+
 var Activity.isContentUnderStatusBar: Boolean
   get() {
     val decorView = window.decorView
