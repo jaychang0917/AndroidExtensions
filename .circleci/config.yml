@@ -6,12 +6,6 @@ jobs:
     steps:
       - checkout
       - run: echo "A first hello" > foo.txt
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory
-          root: my_workspace
-          # Must be relative path from root
-          paths:
-            - echo-output    
       - store_test_results:
           path: build/test-results
       - store_artifacts:
@@ -20,22 +14,6 @@ jobs:
           path: build/reports/lint-results.html
       - store_test_results:
           path: build/reports
-  two:
-    docker:
-      - image: circleci/ruby:2.4.1
-    steps:
-      - checkout
-      - run: echo "A more familiar hi"  
-      - attach_workspace:
-          # Must be absolute path or relative path from working_directory
-          at: my_workspace
-
-      - run: |
-          if [[ $(cat my_workspace/echo-output) == "Trying out workspaces" ]]; then
-            echo "It worked!";
-          else
-            echo "Nope!";
-          fi
 
 workflows:
   version: 2
