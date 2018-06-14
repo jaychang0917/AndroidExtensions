@@ -2,7 +2,6 @@ package com.jaychang.extensions.demo.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import com.jaychang.extensions.demo.R
 
 class ViewDemoActivity: AppCompatActivity() {
@@ -12,6 +11,4 @@ class ViewDemoActivity: AppCompatActivity() {
     setContentView(R.layout.activity_view)
   }
 
-  fun change(view: View) {
-  }
 }
